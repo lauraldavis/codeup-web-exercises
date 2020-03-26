@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register With Us</title>
+</head>
+<body>
+<main>
+    <h1>Veridian Dynamics</h1>
+    <!--<form method="POST" action="https://www.elformo.com/forms/5bf52247-0d03-4ff9-90a3-2d3aedc12fb1">-->
+    <form method="POST" action="https://request-inspector.glitch.me/">
+        <section>
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="text" placeholder="Enter email address">
+            <br>
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password" placeholder="Enter your password">
+        </section>
+        <section>
+            <label for="bio">Biography:</label>
+            <br>
+            <textarea id="bio" id="bio" name="bio" cols="30" rows="10"
+                      placeholder="Enter a short description of yourself"></textarea>
+        </section>
+        <br>
+        <section>
+            <p>How did you hear about us? (select all that apply):</p>
+            <label for="billboard">Billboard</label>
+            <input type="checkbox" id="billboard" name="adsource" value="billboard">
+            </label>
+            <br>
+            <label for="radio">Radio Advertisement</label>
+            <input type="checkbox" id="radio" name="adsource" value="radio advertisement">
+            </label>
+            <br>
+            <label for="internet">Internet Advertisement</label>
+            <input type="checkbox" id="internet" name="adsource" value="internet advertisement">
+            </label>
+            <br>
+            <label for="other">Other</label>
+            <input type="checkbox" id="other" name="adsource" value="other">
+            </label>
+            <br>
+        </section>
+        <br>
+        <section>
+            <label for="dropdown">Select the web browser you are using:</label>
+            <select name="dropdown" id="dropdown">
+                <option value="select" default>Select an option</option>
+                <option value="chrome">Chrome</option>
+                <option value="firefox">Firefox</option>
+                <option value="safari">Safari</option>
+                <option value="ie">Internet Explorer</option>
+                <option value="opera">Opera</option>
+                <option value="other">Other</option>
+            </select>
+        </section>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+        <!-- Questions:
+        GET: key-values pairs are returned in a query string and are visible in plain text in the browser after the URL/?<string>
+        POST: key-value pairs are returned
+        missing id: the label is not clickable
+        missing name: affects submitted info (key-value is not passed)
+        -->
+    </form>
+</main>
+</body>
+</html>
