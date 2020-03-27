@@ -27,19 +27,15 @@
             <p>How did you hear about us? (select all that apply):</p>
             <label for="billboard">Billboard</label>
             <input type="checkbox" id="billboard" name="adsource" value="billboard">
-            </label>
             <br>
             <label for="radio">Radio Advertisement</label>
             <input type="checkbox" id="radio" name="adsource" value="radio advertisement">
-            </label>
             <br>
             <label for="internet">Internet Advertisement</label>
             <input type="checkbox" id="internet" name="adsource" value="internet advertisement">
-            </label>
             <br>
             <label for="other">Other</label>
             <input type="checkbox" id="other" name="adsource" value="other">
-            </label>
             <br>
         </section>
         <br>
@@ -61,8 +57,8 @@
         <!-- Questions:
         GET: key-values pairs are returned in a query string and are visible in plain text in the browser after the URL/?<string>
         POST: key-value pairs are returned
-        missing id: the label is not clickable
-        missing name: affects submitted info (key-value is not passed)
+        if missing id: the label is not clickable
+        if missing name: the input is not submitted (key-value is not passed)
         -->
     </form>
 </main>
