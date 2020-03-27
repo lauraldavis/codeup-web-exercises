@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+<main>
+    <h1>Checkout</h1>
+    <form method="POST" action="https://request-inspector.glitch.me/">
+        <section>
+            <label for="cc_num">Credit card number:</label>
+            <input id="cc_num" name="cc_num" type="text" placeholder="Card number" required autofocus>
+            <br>
+            <label for="cc_exp">Credit card expiration:</label>
+            <input id="cc_exp" name="cc_exp" type="text" placeholder="MM/YY" required>
+            <br>
+            <label for="cvv2">Credit card security code:</label>
+            <input id="cvv2" name="cvv2" type="text" placeholder="CVV2 security code" required>
+            <br>
+            <label for="bill_addr1">Credit card billing address (Street address):</label>
+            <input id="bill_addr1" name="bill_addr1" type="text" placeholder="Street address" required>
+            <br>
+            <label for="bill_addr2">Credit card billing address (City, State, Zipcode):</label>
+            <input id="bill_addr2" name="bill_addr2" type="text" placeholder="City, State, Zipcode" required>
+            <br>
+            <label for="cc_keep">Keep this credit card on file for future transactions</label>
+            <input id="cc_keep" name="cc_keep" type="checkbox" checked>
+            <br>
+            <button type="submit">Buy Now!</button>
+        </section>
+    </form>
+</main>
+</body>
+</html>

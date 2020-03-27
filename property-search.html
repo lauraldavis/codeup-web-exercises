@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Property Search</title>
+</head>
+<body>
+<main>
+    <h1>Property Search</h1>
+    <form method="POST" action="https://request-inspector.glitch.me/">
+        <section>
+            <label for="property">Property type:</label>
+            <select name="property" id="property">
+                <option value="any" default>Any</option>
+                <option value="single">Single Family</option>
+                <option value="multi">Multi Family</option>
+                <option value="condo">Condo/Townhome</option>
+                <option value="mobile">Mobile Home</option>
+                <option value="farm">Farm/Ranch</option>
+                <option value="land">Land</option>
+            </select>
+            <br>
+            <label for="sqft">Property size:</label>
+            <select name="sqft" id="sqft">
+                <option value="any" default>Any</option>
+                <option value="<500">Less than 500 sqft</option>
+                <option value="500-1000">500 to 1000 sqft</option>
+                <option value="1000-1500">1000 to 1500 sqft</option>
+                <option value="1500-2000">1500 to 2000 sqft</option>
+                <option value="2000-2500">2000 to 2500 sqft</option>
+                <option value="2500-3000">2500 to 3000 sqft</option>
+                <option value="3000-4000">3000 to 4000 sqft</option>
+                <option value="4000-5000">4000 to 5000 sqft</option>
+                <option value="5000+">More than 5000 sqft</option>
+            </select>
+            <br>
+            <label for="min_price">Minimum price:</label>
+            <select name="min_price" id="min_price">
+                <option value="none" default>No minimum</option>
+                <option value="$60,000">$60K</option>
+                <option value="$120,000">$120K</option>
+                <option value="$180,000">$180K</option>
+                <option value="$250,000">$250K</option>
+                <option value="$300,000">$3000K</option>
+                <option value="$400,000">$400K</option>
+                <option value="$450,000">$450K</option>
+            </select>
+            <br>
+            <label for="max_price">Maximum price:</label>
+            <select name="max_price" id="max_price">
+                <option value="none" default>No maximum</option>
+                <option value="$120,000">$120K</option>
+                <option value="$250,000">$250K</option>
+                <option value="$350,000">$350K</option>
+                <option value="$450,000">$450K</option>
+                <option value="$600,000">$600K</option>
+                <option value="$700,000">$700K</option>
+                <option value="$800,000">$800K</option>
+                <option value="none">Any price</option>
+            </select>
+            <br>
+            <label for="zipcode">Zipcode:</label>
+            <input id="zipcode" name="zipcode" type="text" placeholder="Zipcode">
+            <br>
+            <label for="radius">Search Radius in Miles:</label>
+            <select name="radius" id="radius">
+                <option value="Any" default>Miles</option>
+                <option value="1">1 mile</option>
+                <option value="2">2 miles</option>
+                <option value="5">5 miles</option>
+                <option value="10">10 miles</option>
+                <option value="20">20 miles</option>
+            </select>
+            <br>
+            <label for="beds">Number of bedrooms:</label>
+            <select name="beds" id="beds">
+                <option value="Any" default>Beds</option>
+                <option value="1+">1+ Beds</option>
+                <option value="2+">2+ Beds</option>
+                <option value="3+">3+ Beds</option>
+                <option value="4+">4+ Beds</option>
+                <option value="5+">5+ Beds</option>
+            </select>
+            <br>
+            <label for="baths">Number of bathrooms:</label>
+            <select name="baths" id="baths">
+                <option value="Any" default>Baths</option>
+                <option value="1+">1+ Baths</option>
+                <option value="2+">2+ Baths</option>
+                <option value="3+">3+ Baths</option>
+                <option value="4+">4+ Baths</option>
+                <option value="5+">5+ Baths</option>
+            </select>
+            <br>
+            <label for="stories">Stories:</label>
+            <select name="stories" id="stories">
+                <option value="Any" default>Stories</option>
+                <option value="single">Single</option>
+                <option value="multi">Multi</option>
+            </select>
+            <br>
+            <label for="garage">Garage:</label>
+            <select name="garage" id="garage">
+                <option value="Any" default>Garage</option>
+                <option value="1+">1+</option>
+                <option value="2+">2+</option>
+                <option value="3+">3+</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit">Search now</button>
+        </section>
+    </form>
+</main>
+</body>
+</html>
