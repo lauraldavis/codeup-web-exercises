@@ -1,3 +1,52 @@
 .fancy-header {
     color: purple;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #BB00EE;
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Gochi Hand', 'Indie Flower', 'Crafty Girls', Arial, 'Sans-serif';
+    background-color: lightgrey;
+    background-image: url("../img/mug-white-table.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+ul {
+    list-style: "\2713";
+}
+
+table, th, td {
+    background-color: lavender;
+    border-collapse: collapse;
+    padding: 0.5rem;
+    text-align: left;
+    vertical-align: bottom;
+    border: 1px solid #BB00EE;
+    font-size: large;
+}
+
+a:link {
+    color: blue;
+    text-decoration: underline;
+}
+a:visited {
+    color: darkslategrey;
+    text-decoration: underline;
+}
+a:hover {
+    color: mediumpurple;
+}
+a:active {
+    color: turquoise;
 }
