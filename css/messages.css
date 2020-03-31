@@ -1,11 +1,8 @@
-body, html {
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Ubuntu, sans-serif;
-}
-
+/* Can use the * selector (all elements) and/or :root
+    https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+    https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors
+    https://developer.mozilla.org/en-US/docs/Web/CSS/:root
+*/
 :root {
     --info-bg: #CDDEFF;
     --info-font: #4A46A0;
@@ -17,11 +14,18 @@ body, html {
     --error-font: #BE7785;
 }
 
+body, html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Ubuntu, sans-serif;
+}
+
 .message {
-    width: 80%;
-    margin: 0.5em;
-    padding: 0.7em;
-    border: 2px solid grey;
+    margin: 0.25em;
+    padding: 0.5em;
+    border: 2px solid lightgrey;
     border-radius: 5px;
 }
 
