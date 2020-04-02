@@ -23,7 +23,7 @@ h2, h3 {
     background: green;
     height: 1em;
     width: 2em;
-    align-self: center;
+    /*align-self: center;  same as the section nth of type(1) changes */
 }
 
 .border {border: 2px solid black;}
@@ -37,19 +37,22 @@ h2, h3 {
     /* enter needed declarations here */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly; /* about the same as space-between or space-around */
 }
 
 section {
     /* enter needed declarations here */
     display: flex;
     justify-content: space-between;
+    /* flex-wrap: wrap  can go here instead of section 6, either one */
 }
 
 section:nth-of-type(1) {
     height: 3em;
     background: lightgreen;
     /* enter needed declarations here */
+    align-items: center;
+    justify-content: space-between;
 }
 section:nth-of-type(1) div:last-child {
     /* enter needed declarations here */
@@ -64,12 +67,12 @@ section:nth-of-type(1) div:last-child {
 
 .purple-box:nth-of-type(1) {
     /* enter needed declarations here */
-    flex-grow: 4;
+    flex-grow: 2;
 }
 
 .purple-box:nth-of-type(2) {
     /* enter needed declarations here */
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 .blue-box {
@@ -85,7 +88,7 @@ section:nth-of-type(3) {
 
 section:nth-of-type(3) h3 {
     /* enter needed declarations here */
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 .orange-circle {
@@ -101,7 +104,7 @@ section:nth-of-type(3) h3 {
     width: 5em;
     background: brown;
     /* enter needed declarations here */
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 .large-brown-box:nth-of-type(2) {
