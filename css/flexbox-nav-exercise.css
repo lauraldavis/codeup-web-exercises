@@ -33,9 +33,9 @@ nav ul li:nth-child(5) {
         this allows the last flex item to be right justified
         by filling remaining space to the left of the flex item with margin
     */
-    position: absolute:
+    /*position: absolute;*/
     flex-basis: 30%;
-    max-height: 25vh;
+    max-height: 10vh;
     margin: auto;
     padding: .2em 0;
     font-family: "Montserrat", sans-serif;
