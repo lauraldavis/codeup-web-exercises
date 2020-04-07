@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    background: white;
+    border: 1em solid white;
+    margin: 0;
+    font-family: serif;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: 3fr 10fr 2fr;
+    grid-template-rows: 1fr 7fr 1fr;
+    grid-template-areas: /* use section names to define grid areas below */
+            "header  header   header"
+            "nav     article  section"
+            "nav     footer   footer";
+    grid-gap: .5em;
+}
+header {
+    grid-area: header;
+    min-height: 10vh;
+}
+nav {
+    grid-area: nav;
+}
+article {
+    grid-area: article;
+}
+section {
+    grid-area: section;
+}
+footer {
+    grid-area: footer;
+    min-height: 10vh;
+}
+header,
+nav,
+article,
+section,
+footer {
+    background: gold;
+    font-size: x-small;
+    padding: 5px;
+}

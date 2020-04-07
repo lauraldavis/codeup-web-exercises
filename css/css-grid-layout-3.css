@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background: white;
+    border: 1em solid white;
+    margin: 0;
+    font-family: serif;
+}
+main {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: .25em;
+}
+main div {
+    background: #FCD701;
+    font-size: xx-large;
+    color: white;
+}
+
+/*grid-area: row-start / col-start / row-end / col-end;*/
+.one {grid-area: 1 / 1 / 2 / 5}
+.two {grid-area: 2 / 1 / 6 / 2}
+.three {grid-area: 2 / 2 / 3 / 3}
+.four {grid-area: 2 / 3 / 3 / 5}
+.five {grid-area: 3 / 2 / 4 / 4}
+.six {grid-area: 3 / 4 / 4 / 5}
+.seven {grid-area: 4 / 2 / 5 / 3}
+.eight {grid-area: 4 / 3 / 5 / 4}
+.nine {grid-area: 4 / 4 / 5 / 5}
+.ten {grid-area: 5 / 2 / 6 / 6}
