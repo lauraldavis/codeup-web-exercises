@@ -19,7 +19,7 @@ body {
     grid-gap: 1em;
     /* no row properties are needed */
     /* TODO: the height of the wrapper should be 100 viewport height units */
-    height: 100vh;
+    height: 100vh; /* this adds the scrollbar to the main area w/cards */
 }
 
 ul {
@@ -48,7 +48,7 @@ main {
     /* TODO: make main a grid container as well */
     display: grid;
     /* TODO: define main to contain three columns that together take up equally the full width of main and have a 1em gap between grid items */
-    grid-template-columns: repeat(3, 33.3%);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
     overflow: auto;
 }
@@ -98,7 +98,6 @@ nav ul {
     flex-direction: column;
 }
 
-
 nav a {
     width: 100%;
     font-weight: bold;
@@ -123,9 +122,11 @@ nav a:hover {
     border-radius: 10px;
     position: relative;
     /* TODO: add a property that causes a transition of the border from lightgrey to near black in .2 seconds */
-    transition-property: border-color;
+    /*transition-property: border-color;
     transition-delay: .2s;
-
+    Can combine settings: if you specify border rather than border-color
+    it will transition any changes to border (width/style/color). */
+    transition: border .2s ease;
 }
 
 .card:hover {
