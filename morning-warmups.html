@@ -49,21 +49,28 @@
     // console.log(seven(), 7);
 
     // Write a JavaScript function that takes in an argument, and will return the boolean true if the argument is an even number, and false for all other arguments.
-    function isEven(input) {
-        return input % 2 === 0;
-    };
+    // function isEven(input) {
+    //     return input % 2 === 0;
+    // };
     // console.log(isEven(2), true);
     // console.log(isEven(3), false);
     // console.log(isEven(-4), true);
 
     // Write a function, returnEvenOddMessage, that takes in a number input and returns the string "is even" if the number input is even and returns the string "is odd" if the number input is odd.
     // HINT: Is there some code you have already written that can be used to solve the problem?
-    function returnEvenOddMessage(num) {
-        var result = isEven(num) ? "is even" : "is odd";
-        return result;
+    // function returnEvenOddMessage(num) {
+    //     var result = isEven(num) ? "is even" : "is odd";
+    //     return result;
+    // };
+    // console.log(returnEvenOddMessage(9), 9);
+    // console.log(returnEvenOddMessage(6), 6);
+
+    // Write a function that returns true or false as to whether or not a number passed into the function is a whole number.
+    function isWholeNum(num) {
+        return num % 1 === 0;   // David's example was return num === Math.round(num);
     };
-    console.log(returnEvenOddMessage(9), 9);
-    console.log(returnEvenOddMessage(6), 6);
+    console.log(isWholeNum(9), 9);
+    console.log(isWholeNum(1.5), 1.5);
 
 </script>
 </body>
