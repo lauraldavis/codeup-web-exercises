@@ -1,0 +1,9 @@
+._custom-img {
+    background-image: url("../img/pizza.png");
+}
+._jumbo-bg {
+    opacity: 0.7;
+    font-weight: 400;
+    /*replaced padding: 0 and margin: auto
+    w/Bootstrap px-0 mt-5*/
+}
