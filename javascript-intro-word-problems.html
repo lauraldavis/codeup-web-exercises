@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Intro Exercise</title>
+</head>
+<body>
+
+<script>
+    "use strict";
+    // JS Intro Exercises
+
+    // 1. For each of the following code blocks, read the code and predict what the result of evaluating it would be,
+    //    then execute the statement(s) in the Chrome console.
+
+    var a = 1;
+    var b = a++;
+    // a is 2 & b is 1
+    var c = ++a;
+    // a and c are 3, b is 1
+    // what is the value of a, b, and c?
+    // a is 3, b is 1, c is 3
+
+    var d = "hello";
+    // d is NaN
+
+    var e = false;
+    // e is 0
+
+    d++;
+    // d is NaN
+
+    e++;
+    // e is 1
+
+    var perplexed; // perplexed is undefined (no value is assigned)
+    perplexed + 2;
+    // undefined
+
+    var price = 2.7;
+    price.toFixed(2);
+    // "2.70"
+
+    var price = "2.7";
+    // price.toFixed(2);
+    // returns typeError: price.toFixed is not a function at JS Intro Word Problem...: 45
+    // object w/attached .function() - when variable is set to primitive type that determines what type of functions are available to use on it.
+    // In this case you'd have to convert the string to a number before applying the method.
+
+    isNaN(0)
+    // false
+
+    isNaN(1)
+    // false
+
+    isNaN("")
+    // false
+    // because Number("") returns 0
+
+    isNaN("string")
+    // true
+
+    isNaN("0")
+    // false
+
+    isNaN("1")
+    // false
+
+    isNaN("3.145")
+    // false
+
+    isNaN(Number.MAX_VALUE)
+    // false
+
+    isNaN(Infinity)
+    // false
+
+    isNaN("true")
+    // true
+
+    isNaN(true)
+    // false
+
+    isNaN("false")
+    // true
+
+    isNaN(false)
+    // false
+
+    // to illustrate why the isNaN() function is needed:
+    NaN == NaN
+    // false
+
+    !true
+    // false
+
+    !false
+    // true
+
+    !!true
+    // true
+    // the !! is as if the bangs aren't there EXCEPT that it turns it into a boolean, so now it's a truthy/falsy value
+
+    !!false
+    // false
+
+    !!0
+    // false
+
+    !!-0
+    // false
+
+    !!1
+    // true
+
+    !!-1
+    // true
+
+    !!0.1
+    // true
+
+    !!"hello"
+    // true
+
+    !!""
+    // false
+
+    !!''
+    // false
+
+    !!"false"
+    // true
+
+    !!"0"
+    // true
+
+
+    // 2. Execute the following statement in the Chrome JavaScript console and then follow the directions below.
+        var sample = "Hello Codeup";
+    // Use .length to find the number of characters in the string.
+        sample.length;
+        // 12
+    // Try to make the sample string all upper or all lower case.
+        sample.toUpperCase();
+        // "HELLO CODEUP"
+    // Update the variable sample via concatenation so that it contains "Hello Codeup Students".
+        sample += " Students";
+        // "Hello Codeup Students"
+    // Replace "Students" with "Class".
+        sample = sample.replace("Students", "Class");
+        // "Hello Codeup Class"
+    // Find the index of "c" using .indexOf(). What do you observe?
+        sample.indexOf("c");
+        // -1 (i.e. not found)
+    // Find the index of "C" using .indexOf().
+        sample.indexOf("C");
+        // 6
+    // Retrieve a substring that contains only the word "Codeup" by using indexOf() and substring().
+        sample.substring(sample.indexOf("C"),sample.indexOf("C") + 6);
+        // "Codeup"
+
+
+    // 3. Write some JavaScript code, that is, variables and operators, to describe the following scenarios. Do not worry
+    // about the real operations to get the values, the goal of these exercises is to understand how real world conditions
+    // can be represented with code.
+
+    // 3a. You have rented some movies for your kids: The little mermaid (for 3 days), Brother Bear (for 5 days, they love it),
+    // and Hercules (1 day, you don't know yet if they're going to like it). If price for a movie per day is $3, how much
+    // will you have to pay?
+    var littleMermaidDays = 3, brotherBearDays = 5, herculesDays = 1;
+    var totalDays = littleMermaidDays + brotherBearDays + herculesDays;
+    var dailyRateDollars = 3;
+    var totalPaymentDue = totalDays * dailyRateDollars;
+    console.log(totalPaymentDue);
+    console.log("3a. The total movie rental payment due is: $" + totalPaymentDue);
+    // 27
+
+    // 3b. Suppose you're working as a contractor for 3 companies: Google, Amazon and Facebook, they pay you a different
+    // rate per hour. Google pays $400, Amazon $380, and Facebook $350. How much will you receive in payment for this week?
+    // You worked 10 hours for Facebook, 6 hours for Google and 4 hours for Amazon.
+    var googleDollarsPerHr = 400, amazonDollarsPerHr = 380, facebookDollarsPerHr = 350;
+    var googleHrsWorked = 6, amazonHrsWorked = 4, facebookHrsWorked = 10;
+    var googleWeeklyPayDollars = googleDollarsPerHr * googleHrsWorked;
+    var amazonWeeklyPayDollars = amazonDollarsPerHr * amazonHrsWorked;
+    var facebookWeeklyPayDollars = facebookDollarsPerHr * facebookHrsWorked;
+    var totalWeeklyPayDollars = googleWeeklyPayDollars + amazonWeeklyPayDollars + facebookWeeklyPayDollars;
+    // note: better to calculate totalWeeklyPayDollars in steps and use += to add to the total with each step
+
+    console.log(totalWeeklyPayDollars);
+    console.log("3b. Your total paycheck for this week is: $" + totalWeeklyPayDollars);
+    // 7420
+
+    // 3c. A student can be enrolled in a class only if the class is not full and the class schedule does not conflict
+    // with her current schedule.
+    var isClassFull = false, isScheduleConflict = false;
+    var canEnrollStudent = (!isClassFull && !isScheduleConflict);
+
+    console.log(canEnrollStudent);
+    console.log("3c. This student can enroll - this statement is: " + canEnrollStudent);
+    // true
+
+    // better / simpler solution is using a positive view instead of negative (classIsNotFull, classScheduleDoesNotConflict)
+    var seatsAvailable = true;
+    var noScheduleConflict = false;
+    var canEnroll = (seatsAvailable && noScheduleConflict);
+    // false
+
+    // 3d. A product offer can be applied only if a person buys more than 2 items, and the offer has not expired.
+    // Premium members do not need to buy a specific amount of products.
+    var itemsPurchasedCount = 3, isPremiumMember = true, isProductOfferCurrent = true;
+    var isProductDiscountValid = isProductOfferCurrent && (itemsPurchasedCount > 2 || isPremiumMember);
+
+    console.log(isProductDiscountValid);
+    console.log("3d. This product offer validation is: " + isProductDiscountValid);
+    // true
+
+
+    // 4. Use the following code to follow the instructions below:
+    var username = 'codeup';
+    var password = 'notastrongpassword';
+
+    // Create a variable that holds a boolean value for each of the following conditions:
+
+    // the password must be at least 5 characters
+    // the password must not include the username
+    // the username must be no more than 20 characters
+    // neither the username or password can start or end with whitespace
+
+    var minLength = 5;  // password
+    var maxLength = 20; // username
+
+    // password
+    var hasMinLength = password.length >= minLength;
+    // username
+    var hasMaxLength = username.length <= maxLength;
+
+    // username not included in the password
+    var hasNoUsernameWithin = password.indexOf(username) < 0;
+
+    // check password and username for whitespace (at start or end)
+    var isTrimPassword = (password.length === password.trim().length);
+    var isTrimUsername = (username.length === username.trim().length);
+
+    // check all the conditions
+    var isValidUsernamePassword = hasMinLength && hasMaxLength && hasNoUsernameWithin && isTrimUsername && isTrimPassword;
+    console.log(isValidUsernamePassword);
+    console.log("4. All the conditions are met for a valid username & password: " + isValidUsernamePassword);
+    // true
+
+
+    // Simpler solution that checks the same specified criteria
+    var isValidUsername = ((username.length <= 20) && (username === username.trim()));
+    var isValidPassword = ((password.length >= 5) && (password === password.trim()) && (password !== username) );
+    console.log("4. alternate solution - is username valid?: " + isValidUsername);
+    console.log("4. alternate solution - is password valid?: " + isValidPassword);
+    // true & true
+
+</script>
+
+</body>
+</html>
