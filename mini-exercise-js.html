@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS mini-exercise</title>
+</head>
+<body>
+<script>
+    "use strict";
+
+    // ===== MINI PROBLEMS
+    // Write a function, returnFive, that returns the number five. No inputs should be defined.
+    function returnFive() {
+        return Number(5);
+    }
+
+    console.log(returnFive(), "param: none, expected return: 5");
+
+    // Write a function, isFive, that takes in an input and returns the boolean value true if the passed argument is the number 5 or the string "5". Return false otherwise.
+    function isFive(input) {
+        return (input == 5);
+        // could also use: return input === 5 || input === '5';
+        // can NOT use: return input === (5 || "5");
+    }
+
+    console.log(isFive(5), "param: 5, expected return: true");
+    console.log(isFive("5"), "param: \"5\", expected return: true");
+    console.log(isFive(9), "param: 9, expected return: false");
+
+    // Write a function, isShortWord, that takes in a string and returns the boolean value true if the passed argument is shorter than 5 characters. Return false otherwise.
+    function isShortWord(str) {
+        return (str.length < 5);
+    }
+
+    console.log(isShortWord("me"), "param: \"me\", expected return: true ");
+    console.log(isShortWord("absolutely"), "param: \"absolutely\", expected return: false ");
+    console.log(isShortWord("eight"), "param: \"eight\", expected return: false");
+
+    // Write a function, isSameLength, that takes in two string inputs and returns the boolean value true if the passed arguments are the same length. Return false otherwise.
+    function isSameLength(str1,str2) {
+        return (str1.length === str2.length);
+    }
+
+    console.log(isSameLength("me", "us"), "params: \"me\", \"us\", expected return: true");
+    console.log(isSameLength("me", "you"), "params: \"me\", \"you\", expected return: false");
+
+    // Write a function, getSmallerSegment, that takes in a string and a number input. The function should return a substring of the first argument that is as many characters long as the second argument in lowercase.
+    // example input: getSmallerSegment("Codeup", 3)
+    // example output: "cod"
+    function getSmallerSegment(str,num) {
+        return str.substring(0,num).toLowerCase();
+    }
+
+    console.log(getSmallerSegment("Codeup", 3), "params: \"Codeup\", 3, expected return: cod");
+    console.log(getSmallerSegment("eighty", 5), "params: \"eighty\", 5, expected return: eight");
+
+</script>
+</body>
+</html>
