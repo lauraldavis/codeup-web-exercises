@@ -1,3 +1,5 @@
+(function () {
+
 "use strict";
 
 /**
@@ -85,8 +87,10 @@ console.log(calculateTip(0.15, 33.42), "Expect return: 5.013");
  * then display the dollar amount they should tip
  */
 var totalBillDollars = Number(prompt("Enter the total bill in dollars and cents (for example: 25.49"));
-var tipPercentage = Number(prompt("Enter a percentage you would like to tip (for example: 0.15 for 15%, 0.20 for 20%:)"));
-alert("For a bill of " + totalBillDollars + " and a tip percentage of " + tipPercentage + ", the tip is $" + calculateTip(tipPercentage,totalBillDollars).toFixed(2));
+var tip = Number(prompt("Enter the percentage you would like to tip (Enter a number 1 - 100 for the percent value)"));
+var tipPercentage = tip / 100;
+var tipDollars = calculateTip(tipPercentage,totalBillDollars).toFixed(2);
+alert("For a total bill of $" + totalBillDollars + ", a tip of " + tip + "% would be $" + tipDollars);
 
 /**
  * TODO:
@@ -112,3 +116,5 @@ function applyDiscount(price,discountPercentage) {
 
 console.log(applyDiscount(100, 0.20), "Expect return: 80");
 console.log(applyDiscount(45.99, 0.12), "Expect return: 40.4712");
+
+})();
