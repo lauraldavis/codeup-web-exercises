@@ -103,18 +103,25 @@ alert(analyzeColorSwitch(color));
  */
 function calculateTotal(luckyNum,totalAmount) {
     var discount = 0;
-    if (luckyNum === 1) {
-        discount = .10;
-    } else if (luckyNum === 2) {
+    switch(luckyNum) {
+        case 1:
+            discount = .10;
+            break;
+        case 2:
             discount = .25;
-    } else if (luckyNum === 3) {
-        discount = .35;
-    } else if (luckyNum === 4) {
-        discount = .50;
-    } else if (luckyNum === 5) {
-        discount = 1.0;
-    } else {
-        discount = 0;
+            break;
+        case 3:
+            discount = .35;
+            break;
+        case 4:
+            discount = .50;
+            break;
+        case 5:
+            discount = 1.0;
+            break;
+        default:
+            discount = 0;
+            break;
     }
     return (discount === 0) ? totalAmount : totalAmount - (totalAmount * discount);
 }
