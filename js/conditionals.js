@@ -28,11 +28,13 @@ function analyzeColor(strColorName) {
     } else if (strColorName === "cyan") {
         return "I don't know anything about cyan";
     } else {
-        return "Is " + strColorName + " a color? I don't know what it is!";
+        return "Is " + strColorName + " a color? It's not on my list!";
     }
 }
 
+console.log(analyzeColor("blue"));
 console.log(analyzeColor("red"));
+console.log(analyzeColor("cyan"));
 console.log(analyzeColor("purple"));
 
 // Don't change the next two lines!
@@ -66,7 +68,7 @@ function analyzeColorSwitch(strColorName) {
             return "I don't know anything about cyan";
             break;
         default:
-            return "Is " + strColorName + " a color? I don't know what it is!";
+            return "Is " + strColorName + " a color? It's not on my list!";
             break;
     }
 }
@@ -77,7 +79,7 @@ function analyzeColorSwitch(strColorName) {
  * user to your `analyzeColor` function. Alert the return value from your
  * function to show it to the user.
  */
-var color = prompt("Enter the name of a color");
+var color = prompt("Enter the name of a color:");
 alert(analyzeColorSwitch(color));
 
 /* ########################################################################## */
@@ -140,10 +142,10 @@ console.log(calculateTotal(5, 100), 0);
 // Generate a random number between 0 and 6
 var luckyNumber = Math.floor(Math.random() * 6);
 
-var totalBill = Number(prompt("Enter the total of your bill, in dollars and cents, Example 100.00")).toFixed(2);
+var totalBill = Number(prompt("Enter the total bill, in dollars and cents, Example 100.00")).toFixed(2);
 var newBill = Number(calculateTotal(luckyNumber,totalBill)).toFixed(2);
-var discountMessage = (totalBill === newBill) ? "Sorry, no discount this time!" : "Congrats, you got a discount!";
-alert("Your lucky number is " + luckyNumber + ", your bill was $" + totalBill + " and your new bill is now $" + newBill + ". " + discountMessage);
+var discountMessage = (totalBill === newBill) ? ". Sorry, no discount this time!" : ". Congrats, you got a discount!";
+alert("Your lucky number is " + luckyNumber + ", your bill was $" + totalBill + ", your NEW bill amount is $" + newBill + discountMessage);
 
 /**
  * TODO:
@@ -163,17 +165,17 @@ alert("Your lucky number is " + luckyNumber + ", your bill was $" + totalBill + 
  */
 function isEven(num) {
     var isEven = (num % 2 === 0) ? "even" : "odd";
-    alert("The number you entered is: " + isEven + ".");
+    alert("The number you entered (" + num + ") is: " + isEven + ".");
 }
 
 function plus100(num) {
     var plus100 = num + 100;
-    alert("The number you entered, plus 100, is: " + plus100 + ".");
+    alert("The number you entered (" + num + "), plus 100, is: " + plus100 + ".");
 }
 
 function isPositive(num) {
     var isPositive = (num >= 0) ? "positive" : "negative";
-    alert("The number you entered is: " + isPositive + ".");
+    alert("The number you entered (" + num + ") is: " + isPositive + ".");
 }
 
 function enterNumber() {
