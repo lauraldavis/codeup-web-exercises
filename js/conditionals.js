@@ -171,7 +171,8 @@ function plus100(num) {
 }
 
 function isPositive(num) {
-    return (num >= 0) ? "positive" : "negative";
+    return (num > 0) ? "positive" : "negative";
+    // zero is not an integer & is neither positive or negative
 }
 
 function enterNumber() {
