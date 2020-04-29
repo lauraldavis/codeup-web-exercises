@@ -4,10 +4,12 @@
 // While Loops
 // 2. Create a while loop that uses console.log() to create the output shown below. 2 \n 4 \n 8 \n 16 \n ... through 65536
 var num = 2;
+var output = "";
 while (num <= 65536) {
-    console.log(num);
+    output += num + "\n";
     num = num * 2;
 }
+console.log(output);
 
 
 // Do While Loop
@@ -23,17 +25,23 @@ var allCones = Math.floor(Math.random() * 50) + 50;
 // Cannot sell you 6 cones I only have 3...  // If there are not enough cones
 // Yay! I sold them all! // If there are no more cones
 
+var output = "";
+
 do {
     // console.log("Total cones to sell is " + allCones);
     var buyCones = Math.floor(Math.random() * 5) + 1;
     if (buyCones <= allCones) {
-        console.log(buyCones + " cones sold...");
+        // console.log(buyCones + " cones sold...");
+        output += buyCones + " cones sold..." + "\n";
         allCones -= buyCones;
         // console.log("New total is " + allCones);
         if (allCones === 0) {
-            console.log("Yay! I sold them all!")
+            output += "Yay! I sold them all!";
         }
     } else {
-        console.log("Cannot sell you " + buyCones + " I only have " + allCones + "...");
+        // console.log("Cannot sell you " + buyCones + " I only have " + allCones + "...");
+        output += "Cannot sell you " + buyCones + " I only have " + allCones + "..." + "\n";
     }
 } while (allCones >= 1);
+
+console.log(output);
