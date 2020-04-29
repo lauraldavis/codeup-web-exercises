@@ -13,14 +13,14 @@ function isEven(number) {
 // https://www.plus2net.com/javascript_tutorial/while-loop.php
 do {
     var num = parseInt(prompt("Please enter an odd number from 1 to 50", ""));
-    if (num >= 1 && num < 50 && !isEven(num)) {
+    if (num >= 1 && num < 50 && !isEven(num)) { // this line is a good candidate for separating out in a function
         break;
     }
 } while (true);
 
 // 3. Use a loop and the continue statement to output all the odd numbers between 1 and 50, except for the number the user entered.
 // refactored to return a single output string rather than console logging each line
-output = "Number to skip is: " + num;
+output = "Number to skip is: " + num + "\n";
 for (var i = 1; i <= 50; i += 2) {
     // print odd numbers between 1 and 50 (Here is an odd number: n) except
     // for the user entered number print Yikes! Skipping number: n
