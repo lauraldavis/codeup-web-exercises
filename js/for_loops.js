@@ -25,7 +25,7 @@ for (var i = 1; i <= 10; i++) {
     console.log(i + " output " + random + " is " + (isEven(random) ? "even" : "odd"));
 }
 
-// 4. Create a for loop that uses console.log to create the output shown below. Example: 1 \n 22 \n 333 \n ... 999999999
+// 4. Create a for loop that uses console.log to create the output shown below. Example: 1 \n 22 \n 333 \n ... 999999999 (number pyramid)
 for (var i = 1; i < 10; i++) {
     console.log(i.toString().repeat(i));
 }
