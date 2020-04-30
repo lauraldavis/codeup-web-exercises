@@ -10,9 +10,8 @@ console.log("Let's manipulate some arrays");
 /* ***************************************************************
 * 						ADDING ELEMENTS
 *************************************************************** */
-// .push adds elements to the end of an array
-// .unshift adds elements to the beginning of an array
-// both return the new length of the array
+// .push adds elements to the end of an array (returns new array length)
+// .unshift adds elements to the beginning of an array (returns new array length)
 
 var numStrings = ['three','four','five','six','seven'];
 
@@ -31,7 +30,8 @@ console.log(numStrings);
 /* ***************************************************************
 * 						REMOVING ELEMENTS
 *************************************************************** */
-// returns the element you are removing
+// pop removes the last element (returns the removed element)
+// shift removes the first element (returns the removed element)
 
 var activeCohorts = ['deimos','europa','fortuna','ganymede','ada','bayes'];
 
