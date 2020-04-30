@@ -2,6 +2,8 @@
 
 // ================================= LOOPS AND ARRAY BONUSES
 // 1. Create a function that returns a random day of the week
+var daysOfTheWeek = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+
 // 2. Create a function that takes a single letter and returns what number the letter is in the alphabet. Ignore case.
 //   someFunction("a") // returns 1
 //   someFunction("z") // returns 26
@@ -23,6 +25,9 @@
 //     2) delete a student
 //     3) view all students in alphabetical order
 //     4) view all students in reverse alphabetical
+
+
+// Loops Extra Drills
 //  For each of the following outputs, create a while loop, do-while loop, and for loop to duplicate the output...
 // ---------------
 // 10
