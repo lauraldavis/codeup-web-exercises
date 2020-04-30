@@ -1,5 +1,5 @@
 .idea/*
 *.iml
-*\ prework
+/prework/
 secret.txt
 img/bill-the-cat.jpeg
