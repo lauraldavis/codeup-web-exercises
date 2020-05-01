@@ -85,11 +85,45 @@
     // console.log(largestOfTwoNumbers(5,25), 25);
 
     // Create an Array of your favorite TV shows. Using a forEach loop, log each one
-    var favoriteTvShows = ["Stranger Things", "Veep", "Curb Your Enthusiasm", "Treme", "Schitt's Creek"];
+    // var favoriteTvShows = ["Stranger Things", "Veep", "Curb Your Enthusiasm", "Treme", "Schitt's Creek"];
+    //
+    // favoriteTvShows.forEach(function(show){
+    //     console.log(show);
+    // });
 
-    favoriteTvShows.forEach(function(show){
-        console.log(show);
-    });
+    // FizzBuzz - Write a function that prints the numbers from 1 to 100
+    // For numbers divisible by 3, print “Fizz”
+    // For numbers divisible by 5, print “Buzz”
+    // For numbers divisible by both 3 and 5, print “FizzBuzz”
+
+    function isMultipleOfThree(input) {
+        return Number(input) % 3 === 0;
+    }
+
+    function isMultipleOfFive(input) {
+        return Number(input) % 5 === 0;
+    }
+
+    function isMultipleOfThreeAndFive(input) {
+        return Number(input) % 5 === 0 && Number(input) % 3 === 0;
+    }
+
+    function fizzBuzz(startNum, endNum) {
+        var output = "";
+        for (var i = startNum; i <= endNum; i++){
+            if (isMultipleOfThreeAndFive(i)) {
+                output += "FizzBuzz\n";
+            } else if (isMultipleOfThree(i)) {
+                output += "Fizz\n";
+            } else if (isMultipleOfFive(i)) {
+                output += "Buzz\n";
+            } else {
+                output += i + "\n";
+            }
+        }
+        return output;
+    }
+    console.log(fizzBuzz(1, 100));
 
 </script>
 </body>
