@@ -25,9 +25,9 @@
     // remainder / modulo / cube / squareRoot / cubeRoot
     // invertSign
     // degreesToRadians / radiansToDegrees
+    // isBlank / trim
 
     // in progress:
-    // isBlank / trim
     // areEqual / areIdentical
     // not / notNot / and / or
     // reverseString
@@ -418,21 +418,28 @@
 
     //     Make a function named isBlank(input) that determines if a given input is spaces, newline characters, or tabs.
     function isBlank(input) {
-        let re = /\s*|\n|\t/;
-        return re.exec(input);
-        // return re.test(input);
+        // let isMatch = input.match(/[\s\n\t]/); // this works but test() should be faster
+        let isMatch = RegExp(/[\s\n\t]/).test(input);
+        return isMatch;
     }
-    // research regexp groups
 
-    console.log(isBlank("this is a test"),true);
-    console.log(isBlank("This   also is a test"),true);
-    console.log(isBlank("This is \
-        another test"),true);
-    console.log(isBlank("text"),false);
-    console.log(isBlank(""),false);
-
+    // console.log(isBlank("this is a test"),true);
+    // console.log(isBlank("This\talso"),true);
+    // console.log(isBlank("This\nanother"),true);
+    // console.log(isBlank("text"),false);
+    // console.log(isBlank(""),false);
 
     //     Make a function named trim(string) that removes empty spaces before and after the input.
+    function trim(string) {
+        return string.trim();
+    }
+
+    // console.log(trim(" Hello, my name is Inigo Montoya "));
+    // console.log(trim("   You killed my father "));
+    // console.log(trim("Prepare to die...     "));
+
+
+
 
     //     Make a function named areEqual(input1, input2) that returns if both inputs have the same value
 

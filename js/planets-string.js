@@ -27,7 +27,7 @@
 
     var planetsStringBreak = planetsArray.join("<br>");
     console.log(planetsStringBreak);
-    // useful for creating HTML content, displaying the elements in a vertical list
+    // useful for creating formatted HTML content, to display the elements in a vertical list
 
     // Bonus
     function createListItems(arr) {
