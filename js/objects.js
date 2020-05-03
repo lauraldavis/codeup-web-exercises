@@ -158,26 +158,14 @@
      *      ...
      */
 
-    // as a function
-    function loopBooks(arr) {
-        var output = "";
-        arr.forEach(function (element, index, array) {
-            output += "Book # " + (1 + index) + "\n";
-            output += "Title: " + element.title + "\n";
-            output += "Author: " + element.author.firstName + " " + element.author.lastName + "\n";
-            output += "---\n";
-        });
-        return output;
-    }
-    console.log(loopBooks(books));
-
-
-    // as just console logs
+    // as console logs - redone as a function below
     books.forEach(function (book, counter) {
         console.log("Book # " + (1 + counter));
         console.log("Title: " + book.title);
         console.log("Author: " + book.author.firstName + " " + book.author.lastName);
+        console.log("---");
     });
+
 
     /**
      * Bonus:
@@ -189,5 +177,36 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
+
+    function createBook(title, authorFirstName, authorLastName) {
+        var book = {};
+        book.title = title;
+        book.author = {
+            firstName: authorFirstName,
+            lastName: authorLastName
+        };
+        return book;
+    }
+
+    books.push(createBook("The Hitchhiker's Guide to the Galaxy", "Douglas", "Adams"));
+    books.push(createBook("The Hobbit", "J.R.R.", "Tolkien"));
+    books.push(createBook("Oryx and Crake", "Margaret", "Atwood"));
+    books.push(createBook("Yertle the Turtle and Other Stories", "Dr.", "Seuss"));
+    books.push(createBook("Bird by Bird: Some Instructions on Writing and Life", "Anne", "Lamott"));
+
+
+    // as a function
+    function showBookInfo(arr) {
+        var output = "";
+        arr.forEach(function (element, index, array) {
+            output += "Book # " + (1 + index) + "\n";
+            output += "Title: " + element.title + "\n";
+            output += "Author: " + element.author.firstName + " " + element.author.lastName + "\n";
+            output += "---\n";
+        });
+        return output;
+    }
+
+    console.log(showBookInfo(books));
 
 })();
