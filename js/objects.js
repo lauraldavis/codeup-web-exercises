@@ -15,7 +15,8 @@
     var person = {
         firstName: "Laura",
         lastName: "Davis"
-    }
+    };
+
 
     /**
      * TODO:
@@ -54,29 +55,31 @@
         {name: 'George', amount: 320}
     ];
 
-    // console.log(shoppers[0].amount);
-
     // output: the name of the person, the amount before the discount, the discount, if any, and the amount after the discount.
 
     function discountOffer (arr, eligibleAmount, discountPercent) {
-        var decimalDiscount = discountPercent / 100;
+        var discountDecimal = discountPercent / 100;
         var output = "";
         arr.forEach(function (element) {
+            var discount = (discountDecimal * element.amount).toFixed(2);
+            var initialAmount = element.amount.toFixed(2).toString();
+            var gapToDiscountAmount = (eligibleAmount - element.amount).toFixed(2).toString();
+            var finalAmount = (element.amount - discount).toFixed(2).toString();
             if (element.amount > eligibleAmount) {
-                var discount = (decimalDiscount * element.amount).toFixed(2);
-                output += element.name + ", because you spent $" + element.amount.toFixed(2).toString()
+                output += element.name + ", because you spent $" + initialAmount
                     + ", you have earned a discount of $" + discount.toString() + "! Your new total is $"
-                    + (element.amount - discount).toFixed(2).toString() + ".\n";
+                    + finalAmount + ".\n";
             } else {
-                output += element.name + ", you spent $" + element.amount.toFixed(2).toString()
-                    + ", you would need to spend an additional $" + (eligibleAmount - element.amount).toFixed(2).toString()
-                    + " to qualify for our discount offer. Your total is $"
-                    + element.amount.toFixed(2).toString() + ".\n";
+                output += element.name + ", you spent $" + initialAmount
+                    + ", if you spend an additional $" + gapToDiscountAmount + " you would qualify for a "
+                    + discountPercent + "% discount. Your total is $" + initialAmount + ".\n";
             }
         });
         return output;
     }
+
     console.log(discountOffer(shoppers, 200, 12));
+
 
     /** TODO:
      * Create an array of objects that represent books and store it in a
@@ -90,6 +93,45 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
+
+    var books = [
+        {
+            title: "The Siren's of Titan",
+            author: {
+                firstName: "Kurt",
+                lastName: "Vonnegut Jr."
+            }
+        },
+        {
+            title: "The Handmaid's Tale",
+            author: {
+                firstName: "Margaret",
+                lastName: "Atwood"
+            }
+        },
+        {
+            title: "The Cider House Rules",
+            author: {
+                firstName: "John",
+                lastName: "Irving"
+            }
+        },
+        {
+            title: "The Round House",
+            author: {
+                firstName: "Louise",
+                lastName: "Erdrich"
+            }
+        },
+        {
+            title: "The Bone People",
+            author: {
+                firstName: "Keri",
+                lastName: "Hulme"
+            }
+        }
+    ];
+
 
     /**
      * TODO:
@@ -115,6 +157,27 @@
      *      ---
      *      ...
      */
+
+    // as a function
+    function loopBooks(arr) {
+        var output = "";
+        arr.forEach(function (element, index, array) {
+            output += "Book # " + (1 + index) + "\n";
+            output += "Title: " + element.title + "\n";
+            output += "Author: " + element.author.firstName + " " + element.author.lastName + "\n";
+            output += "---\n";
+        });
+        return output;
+    }
+    console.log(loopBooks(books));
+
+
+    // as just console logs
+    books.forEach(function (book, counter) {
+        console.log("Book # " + (1 + counter));
+        console.log("Title: " + book.title);
+        console.log("Author: " + book.author.firstName + " " + book.author.lastName);
+    });
 
     /**
      * Bonus:
