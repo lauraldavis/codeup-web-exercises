@@ -158,13 +158,27 @@
      *      ...
      */
 
-    // as console logs - redone as a function below
+    // as console logs - could also string together with \n as one long console log.
     books.forEach(function (book, counter) {
         console.log("Book # " + (1 + counter));
         console.log("Title: " + book.title);
         console.log("Author: " + book.author.firstName + " " + book.author.lastName);
         console.log("---");
     });
+
+    // as a function
+    function logBooks(arr) {
+        var output = "";
+        arr.forEach(function (element, index, array) {
+            output += "Book # " + (1 + index) + "\n";
+            output += "Title: " + element.title + "\n";
+            output += "Author: " + element.author.firstName + " " + element.author.lastName + "\n";
+            output += "---\n";
+        });
+        return output;
+    }
+
+    console.log(logBooks(books));
 
 
     /**
@@ -195,18 +209,16 @@
     books.push(createBook("Bird by Bird: Some Instructions on Writing and Life", "Anne", "Lamott"));
 
 
-    // as a function
-    function showBookInfo(arr) {
+    // show info for a single book (by title or author)
+    function showBookInfo(book, i) {
         var output = "";
-        arr.forEach(function (element, index, array) {
-            output += "Book # " + (1 + index) + "\n";
-            output += "Title: " + element.title + "\n";
-            output += "Author: " + element.author.firstName + " " + element.author.lastName + "\n";
-            output += "---\n";
-        });
+        output += "Title: " + book.title + "\n";
+        output += "Author: " + book.author.firstName + " " + book.author.lastName + "\n";
+        output += "---\n";
+        console.log(output);
         return output;
     }
 
-    console.log(showBookInfo(books));
+    books.forEach(showBookInfo);
 
 })();
