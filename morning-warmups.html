@@ -96,34 +96,67 @@
     // For numbers divisible by 5, print “Buzz”
     // For numbers divisible by both 3 and 5, print “FizzBuzz”
 
-    function isMultipleOfThree(input) {
-        return Number(input) % 3 === 0;
+    // function isMultipleOfThree(input) {
+    //     return Number(input) % 3 === 0;
+    // }
+    //
+    // function isMultipleOfFive(input) {
+    //     return Number(input) % 5 === 0;
+    // }
+    //
+    // function isMultipleOfThreeAndFive(input) {
+    //     return Number(input) % 5 === 0 && Number(input) % 3 === 0;
+    // }
+    //
+    // function fizzBuzz(startNum, endNum) {
+    //     var output = "";
+    //     for (var i = startNum; i <= endNum; i++){
+    //         if (isMultipleOfThreeAndFive(i)) {
+    //             output += "FizzBuzz\n";
+    //         } else if (isMultipleOfThree(i)) {
+    //             output += "Fizz\n";
+    //         } else if (isMultipleOfFive(i)) {
+    //             output += "Buzz\n";
+    //         } else {
+    //             output += i + "\n";
+    //         }
+    //     }
+    //     return output;
+    // }
+    // console.log(fizzBuzz(1, 100));
+
+    // Create a function that takes in a array input and returns true if one of the elements is a number that matches the number of total elements in the array.
+    // Example input: [1]
+    // Example output: true
+    // Example input: ['bob', 3, false]
+    // Example output: true
+    // Example input: [{'a': 'hello'}, 10, true]
+    // Example output: false
+    // Example input: [5, {'a': 'hello'}, 30, true, null]
+    // Example output: true
+
+    // Can accomplish it using a loop
+    // function isArrayLengthContainedInArray(arr) {
+    //     for (var i = 0; i < arr.length; i++) {
+    //         if (arr[i] === arr.length) {
+    //             return true;
+    //         } else {
+    //             continue;
+    //         }
+    //     }
+    // };
+    //
+    // console.log(isArrayLengthContainedInArray([1]));
+    // console.log(isArrayLengthContainedInArray(["bob", 3, false]));
+
+    // simpler option with includes()
+    function doesArrayIncludeLength(arr) {
+        return arr.includes(arr.length);
     }
 
-    function isMultipleOfFive(input) {
-        return Number(input) % 5 === 0;
-    }
-
-    function isMultipleOfThreeAndFive(input) {
-        return Number(input) % 5 === 0 && Number(input) % 3 === 0;
-    }
-
-    function fizzBuzz(startNum, endNum) {
-        var output = "";
-        for (var i = startNum; i <= endNum; i++){
-            if (isMultipleOfThreeAndFive(i)) {
-                output += "FizzBuzz\n";
-            } else if (isMultipleOfThree(i)) {
-                output += "Fizz\n";
-            } else if (isMultipleOfFive(i)) {
-                output += "Buzz\n";
-            } else {
-                output += i + "\n";
-            }
-        }
-        return output;
-    }
-    console.log(fizzBuzz(1, 100));
+    console.log(doesArrayIncludeLength([1]), true);
+    console.log(doesArrayIncludeLength(["bob", 3, false]), true);
+    console.log(doesArrayIncludeLength(["five", 5, true, 10]), false);
 
 </script>
 </body>
