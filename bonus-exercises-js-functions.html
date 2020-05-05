@@ -26,13 +26,13 @@
     // invertSign
     // degreesToRadians / radiansToDegrees
     // isBlank / trim
-
-    // in progress:
     // areEqual / areIdentical
     // not / notNot / and / or
     // reverseString
     // absoluteValue
     // rolldice
+
+    // in progress:
 
     // Simple Function Drills
     // returnTwo() / sayHowdy() / returnName() / addThree() / sayString()
@@ -438,26 +438,98 @@
     // console.log(trim("   You killed my father "));
     // console.log(trim("Prepare to die...     "));
 
-
-
-
     //     Make a function named areEqual(input1, input2) that returns if both inputs have the same value
+    function areEqual (input1, input2) {
+        return (input1 == input2);
+    }
+
+    // console.log(areEqual(2, "2"), true);
+    // console.log(areEqual("10", 10), true);
+    // console.log(areEqual(null, null), true);
+    // console.log(areEqual("", ""), true);
+    // console.log(areEqual("text", "test"), false);
+    // console.log(areEqual(true, 1), true);
+    // console.log(areEqual(0, false), true);
 
     //     Make a function named areIdentical(input1, input2) that returns if both inputs are same value and data type.
+    function areIdentical(input1, input2) {
+        return (input1 === input2);
+    }
+
+    // console.log(areIdentical(2, 2), true);
+    // console.log(areIdentical(3, "3"), false);
+    // console.log(areIdentical(null, null), true);
+    // console.log(areIdentical(true, 1), false);
+    // console.log(areIdentical("", ""), true);
 
     //     Make a function named not(input) returns the input with a flipped boolean
+    function not(input) {
+        return !input;
+    }
+
+    // console.log(not(true), false);
+    // console.log(not(false), true);
+    // console.log(not(1 + 1), false);
+    // console.log(not(1 === 1), false);
+    // console.log(not(2 + 2 == 4), false);
+    // console.log(not(6 * 9 == 42), true);
 
     //     Make a function named notNot(input) that the negation of the negation of the input.
+    function notNot(input) {
+        return !!input;
+    }
+
+    // console.log(notNot(true), true);
+    // console.log(notNot(2), true);
+    // console.log(notNot(1 === 1), true);
+    // console.log(notNot("2" == "two"), false);
+    // console.log(notNot(6 * 9 == 42), false);
 
     //     Make a function named and(predicate1, predicate2) that returns the logical operation of AND
+    function and(predicate1, predicate2) {
+        return (predicate1 && predicate2);
+    }
+    // predicate is a function that takes one item as input and returns either true or false based on whether the item satisfies some condition
+
+    // console.log(and(isEven(2), isEven(4)), true);
+    // console.log(and(isEven(6), isEven(3)), false);
+    // console.log(and(isBlank("a"), isBlank(" ")), false);
 
     //     Make a function named or(predicate1, predicate2) that returns the logical operation of OR
+    function or(predicate1, predicate2) {
+        return (predicate1 || predicate2);
+    }
+
+    // console.log(or(isEven(3), isBlank(" ")), true);
+    // console.log(or(isBlank(" "), isEven(2)), true);
+    // console.log(or(isBlank("a"), isEven(5)), false);
 
     //     Write a function called reverseString(string) that reverses a string
+    function reverseString(str) {
+        return str.split("").reverse().join("");
+    }
+
+    // console.log(reverseString("test"), "tset");
+    // console.log(reverseString("palindrome"), "emordnilap");
+    // console.log(reverseString("54321"), "12345");
 
     //     Make a function named absoluteValue(number) that returns the absolute value of a number.
+    function absoluteValue(num) {
+        return Math.abs(num);
+    }
+
+    // console.log(absoluteValue(-4), 4);
+    // console.log(absoluteValue(-102.5), 102.5);
+    // console.log(absoluteValue(55), 55);
 
     //     Make a function named rollDice(sides) that takes in an argument containing the number of sides the die should have. Generate a random number between 1 up to and including the number of sides.
+    function rollDice(sides) {
+        return Math.floor(Math.random() * (sides) + 1);
+    }
+
+    // console.log(rollDice(6), "number between 1 and 6");
+    // console.log(rollDice(8), "number between 1 and 8");
+    // console.log(rollDice(12), "number between 1 and 12");
 
 
     //  Simple Function Drills
