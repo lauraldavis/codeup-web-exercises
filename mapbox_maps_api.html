@@ -19,6 +19,7 @@
 <div id='map'></div>
 
 <script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
 <script>
     'use strict';
 
@@ -33,6 +34,28 @@
         // center: [-98.4916, 29.4252] // lat/long coordinates
         center: {lat: latId, lng: lngId}
     });
+
+    var favRestaurantInfo = {
+        address: "999 E Basse Rd, Ste 183, San Antonio, TX 78209",
+        popupHTML: "Torchy's Tacos"
+    };
+
+    function placeMarkerAndPopup(info, token, map) {
+        // the  geocode method from mapbox-geocoder-utils.js
+        geocode(info.address, mapboxKey).then(function (result) {
+            console.log(result);
+            var popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(result)
+                .addTo(map)
+                .setPopup(popup);
+            popup.addTo(map);
+        });
+    }
+
+    placeMarkerAndPopup(favRestaurantInfo, mapboxKey, map);
+
 
 </script>
 </body>
