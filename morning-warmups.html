@@ -150,13 +150,24 @@
     // console.log(isArrayLengthContainedInArray(["bob", 3, false]));
 
     // simpler option with includes()
-    function doesArrayIncludeLength(arr) {
-        return arr.includes(arr.length);
+    // function doesArrayIncludeLength(arr) {
+    //     return arr.includes(arr.length);
+    // }
+    //
+    // console.log(doesArrayIncludeLength([1]), true);
+    // console.log(doesArrayIncludeLength(["bob", 3, false]), true);
+    // console.log(doesArrayIncludeLength(["five", 5, true, 10]), false);
+
+    // Write a javascript function that takes in a number and returns the number raised to the power of four. If any argument is passed into the function that is not a number, return false.
+    function powerOfFour(num) {
+        return (typeof num === "number" && !isNaN(num)) ? Math.pow(num, 4) : false; // Can also use num ** 4
     }
 
-    console.log(doesArrayIncludeLength([1]), true);
-    console.log(doesArrayIncludeLength(["bob", 3, false]), true);
-    console.log(doesArrayIncludeLength(["five", 5, true, 10]), false);
+    console.log(powerOfFour(4), 256);
+    console.log(powerOfFour(2), 16);
+    console.log(powerOfFour("four"), false);
+    console.log(powerOfFour(NaN), false);
+
 
 </script>
 </body>
