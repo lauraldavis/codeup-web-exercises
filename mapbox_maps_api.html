@@ -37,20 +37,21 @@
 
     var favRestaurantInfo = {
         address: "999 E Basse Rd, Ste 183, San Antonio, TX 78209",
-        popupHTML: "Torchy's Tacos"
+        // popupHTML: "<p>Torchy's Tacos</p>"
     };
 
     function placeMarkerAndPopup(info, token, map) {
         // the  geocode method from mapbox-geocoder-utils.js
         geocode(info.address, mapboxKey).then(function (result) {
-            console.log(result);
-            var popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
+            // var popup = new mapboxgl.Popup()
+            //     .setHTML(info.popupHTML);
             var marker = new mapboxgl.Marker()
                 .setLngLat(result)
                 .addTo(map)
-                .setPopup(popup);
-            popup.addTo(map);
+            //     .setPopup(popup);
+            // popup.addTo(map);
+            map.setCenter(result);
+            map.setZoom(14);
         });
     }
 
