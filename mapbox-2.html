@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapbox Mini-exercise 2</title>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id='map'></div>
+<h1>Coordinates: <span id='coords'></span></h1>
+
+<script src='js/keys.js'></script>
+<script>
+    'use strict';
+
+    var lngId = -77.050636;
+    var latId = 38.889248;
+
+    mapboxgl.accessToken = mapboxKey;
+    var map = new mapboxgl.Map({
+        container: 'map', // match the id defined in the div
+        style: 'mapbox://styles/mapbox/streets-v9', // add comma + additional properties to style the map
+        zoom: 10,
+        // center: [-98.4916, 29.4252] // lat/long coordinates
+        center: {lat: 38.9072, lng: -77.0369}
+    });
+
+    var coords = document.getElementById('coords');
+
+    // marker
+    var marker = new mapboxgl.Marker()
+        .setLngLat({lat: 38.889248, lng: -77.050636})
+        .setDraggable(true)
+        .addTo(map);
+
+    var popup = new mapboxgl.Popup()
+        .setHTML('Lincoln Memorial')
+        .addTo(map);
+
+    marker.setPopup(popup);
+
+    coords.innerHTML = marker.getLngLat().toString();
+
+    marker.on('dragend', function() {
+        var newLabel = marker.getLngLat();
+        // popup.setHTML("<h1>" + newLabel+ "</h1>");
+        popup.setHTML(newLabel);
+        coords.innerHTML = newLabel;
+    });
+
+</script>
+
+</body>
+</html>
