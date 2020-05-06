@@ -46,6 +46,9 @@
         }
         // register listener1 to clicks on btn1
         document.getElementById("btn1").addEventListener("click", listener1);
+        // event is an optional parameter, mainly useful for keyboard events (when listening for a specific key)
+        // can use document.querySelector("#btn1") instead of getElementById
+        // when using a named function instead of a variable, you pass the function definition (name without parenthesis) to addEventListener()
 
         // handler function btn3 (Sub Header)
         var listener3 = function (event) {
@@ -89,6 +92,12 @@
         }
         // register listener4 to clicks on btn4
         document.getElementById("btn4").addEventListener("click", listener4);
+
+        /* Can also wrap with an anonymous function - but you would not be able to remove it if its not named
+        document.getElementById("btn4").addEventListener("click", function() {
+            // TODO stuff
+        }
+         */
 
     })();
 </script>
