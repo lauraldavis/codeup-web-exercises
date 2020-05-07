@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapbox Lecture</title>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id='map'></div>
+
+<script src="js/keys.js"></script>
+<script>
+    mapboxgl.accessToken = mapboxKey;
+    var map = new mapboxgl.Map({
+        container: 'map', // match the id defined in the div
+        style: 'mapbox://styles/mapbox/streets-v9', // add comma + additional properties to style the map
+        zoom: 10,
+        // center: [-98.4916, 29.4252] // lat/long coordinates
+        center: {lng: -98.4916, lat: 29.4252}
+    });
+
+    // customizing the map
+        // map.setStyle
+        // map.setZoom
+        // map.setCenter
+
+    // markers (pins)
+    var marker = new mapboxgl.Marker()
+        .setLngLat({lng: -98.4916, lat: 29.4252}) // same as center - use array or object // [-98.4916, 29.4252]
+        .addTo(map);
+    // marker method returns the entire object even when you modify one property
+
+    // modify marker
+    // can change one property at a time or chain them together (either way, returns entire object)
+        // marker.remove();
+    marker.setDraggable(true);
+    // marker
+        // .setDraggable(true),
+        // .addTo(map);
+
+    var myPopup = new mapboxgl.Popup();
+    // .setLngLat(lng: -98.4916, lat: 29.4252})
+    myPopup.setHTML("<p>Testing</p>");
+    myPopup.addTo(map);
+    marker.setPopup(myPopup);
+
+    // Events (Mapbox methods, not DOM Events) using #on, #once, #off
+    // on (type, layerId, listener) - similar event types to DOM Events
+    map.on("click", function() {
+        console.log("hello");
+    });
+
+    marker.on("dragend", function() {
+        console.log("hello");
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapbox Mini-exercise 3</title>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id='map'></div>
+
+<script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
+<script>
+    'use strict';
+    // Mini - Exercise 3 (after geocoding)
+    // Create an HTML file called mapbox-3.html centered on San Antonio that is re-centered over Whitefish, Montana using the coordinates from geocoding the physical address.
+    // Use reverse geocoding with the reverseGeocode function to determine what is at 21.2620 latitude and -157.8060 longitude.
+    mapboxgl.accessToken = mapboxKey;
+    var map = new mapboxgl.Map({
+        container: 'map', // match the id defined in the div
+        style: 'mapbox://styles/mapbox/streets-v9', // add comma + additional properties to style the map
+        zoom: 10,
+        // center: [-98.4916, 29.4252] // lng/lat coordinates
+        center: {lng: -98.4936, lat: 29.4241}
+    });
+
+    // the  geocode method from mapbox-geocoder-utils.js
+    geocode("Whitefish, MT", mapboxKey).then(function(result) {
+        console.log(result);
+        map.setCenter(result);
+        // map.setZoom(10);
+    });
+
+    // reverse geocode method from mapbox-geocoder-utils.js
+    reverseGeocode({lng: -157.8060, lat: 21.2620}, mapboxKey).then(function(results) {
+        // logs the address for the coordinates
+        console.log(results);
+    });
+
+</script>
+
+</body>
+</html>

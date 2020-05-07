@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapbox Mini-exercise 1</title>
+<!--    Mini - Exercise 1 (after customizing map). Create an HTML file called mapbox-1.html. In this file, create a Mapbox map that shows your home town. After 5 seconds, have the map automatically change to a map of the entire United States using a satellite style.-->
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id='map'></div>
+
+<script src="js/keys.js"></script>
+<script>
+    'use strict';
+    mapboxgl.accessToken = mapboxKey;
+    var map = new mapboxgl.Map({
+        container: 'map', // match the id defined in the div
+        style: 'mapbox://styles/mapbox/streets-v9', // add comma + additional properties to style the map
+        zoom: 10,
+        // center: [-98.4916, 29.4252] // lat/long coordinates
+        center: {lat: 43.6983, lng: -86.3640}
+    });
+
+    var delay = 5000; // delay 5 seconds
+    var timeoutId = setTimeout(function () {
+        map.setStyle('mapbox://styles/mapbox/satellite-v9'),
+        map.setCenter({lat: 37.0902, lng: -95.7129}),
+        map.setZoom(2);
+    }, delay);
+
+</script>
+
+</body>
+</html>
