@@ -35,35 +35,58 @@
         center: {lat: latId, lng: lngId}
     });
 
-    var favRestaurantInfo = {
-        address: "999 E Basse Rd, Ste 183, San Antonio, TX 78209",
-        popupHTML: "<p>Torchy's Tacos</p>"
-    };
+    var restaurants = [
+        {
+            name: "Torchy's Tacos",
+            address: "999 E Basse Rd, Ste 183, San Antonio, TX 78209",
+            favDish: "Mr. Orange",
+            popupHTML: "<p>Torchy's Tacos (Lincoln Heights)</p>"
+        },
+        {
+            name: "Señor Veggie",
+            address: "620 S Presa St, San Antonio, TX 78210",
+            favDish: "Veggie Street Tacos",
+            popupHTML: "<p>Señor Veggie</p>"
+        },
+        {
+            name: "Alamo Cafe",
+            address: "10060 I-10, San Antonio, TX 78230",
+            favDish: "Grilled Vegetable Fajitas",
+            popupHTML: "<p>Alamo Cafe (I-10)</p>"
+        },
+        {
+            name: "Green Vegetarian Cuisine",
+            address: "10003 NW Military Hwy, Ste 2115, San Antonio, TX 78230",
+            favDish: "Green Omelette",
+            popupHTML: "<p>Green Vegetarian Cuisine (Alon)</p>"
+        }
+    ];
 
-    function placeMarkerAndPopup(info, token, map) {
-        // the  geocode method from mapbox-geocoder-utils.js
-        geocode(info.address, mapboxKey).then(function (result) {
+    // Jason's walkthrough - broken down into these steps
+    // 1. log the name of each restaurant
+    // 2. using geocoding log the coordinates of each restaurant
+    // 3. add markers for each coordinate
+    // 4. add popups to each marker with HTML containing restaurant name and message
+
+    var markers = [];
+
+    // https://docs.mapbox.com/help/tutorials/building-a-store-locator/#add-event-listeners
+    restaurants.forEach( function(restaurant, i) {
+        // console.log(restaurant.name); // step 1
+        geocode(restaurant.address, mapboxKey).then(function(coords) {
+            // console.log(coords); // step 2
+            var marker = new mapboxgl.Marker() // step 3
+                .setLngLat(coords)
+                .addTo(map);
             var popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
-            var marker = new mapboxgl.Marker()
-                .setLngLat(result)
-                .addTo(map)
-                .setPopup(popup);
-            map.setCenter(result);
-            map.setZoom(14);
+                .setHTML("<h4>" + restaurant.name + "</h4><h5>" + restaurant.address + "</h5>" + restaurant.popupHTML + "Favorite dish: " + restaurant.favDish);
+            marker.setPopup(popup);
+            markers.push(marker); // to store each marker in an array
         });
-    }
-
-    placeMarkerAndPopup(favRestaurantInfo, mapboxKey, map);
-
-    // https://github.com/mapbox/mapbox-gl-js/issues/7793
-    var el = document.createElementsByTagName('div');
-    el.addEventListener("click", function(){
-        var popup = new mapboxgl.Popup()
-            .setHTML(favRestaurantInfo.popupHTML)
-            .addTo(map);
     });
 
+    // if you stored address in an array, then you would refer to it with
+    // restaurant.location.address / restaurant.location.coords
 
 </script>
 </body>
