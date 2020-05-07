@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Mapbox API Exercise</title>
 
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
     <style>
         #map {
             width: 100%;
@@ -16,20 +16,20 @@
 
 <body>
 
-<div id='map'></div>
+<div id="map"></div>
 
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script>
-    'use strict';
+    "use strict";
 
     var lngId = -98.4936;
     var latId = 29.4241;
 
     mapboxgl.accessToken = mapboxKey;
     var map = new mapboxgl.Map({
-        container: 'map', // match the id defined in the div
-        style: 'mapbox://styles/mapbox/streets-v9', // add comma + additional properties to style the map
+        container: "map", // match the id defined in the div
+        style: "mapbox://styles/mapbox/streets-v9", // add comma + additional properties to style the map
         zoom: 10,
         // center: [-98.4916, 29.4252] // lat/long coordinates
         center: {lat: latId, lng: lngId}
@@ -49,13 +49,20 @@
                 .setLngLat(result)
                 .addTo(map)
                 .setPopup(popup);
-            popup.addTo(map);
             map.setCenter(result);
             map.setZoom(14);
         });
     }
 
     placeMarkerAndPopup(favRestaurantInfo, mapboxKey, map);
+
+    // https://github.com/mapbox/mapbox-gl-js/issues/7793
+    var el = document.createElementsByTagName('div');
+    el.addEventListener("click", function(){
+        var popup = new mapboxgl.Popup()
+            .setHTML(favRestaurantInfo.popupHTML)
+            .addTo(map);
+    });
 
 
 </script>
