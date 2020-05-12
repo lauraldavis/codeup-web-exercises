@@ -1,7 +1,13 @@
-"use strict";
+(function($) {
+    "use strict";
 
-$(document).ready(function() {
+    // jQuery document ready inside an IIFE
+    $(document).ready(function() {
 
-    alert( 'The DOM has finished loading!' );
+        alert( 'The DOM has finished loading!' );
+        // rest of your jQuery code goes here
 
-});
+    });
+})(jQuery);
+
+
