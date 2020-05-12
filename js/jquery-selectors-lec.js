@@ -9,8 +9,6 @@ $(document).ready(function() {
 	// $('selector')
 
 
-
-
 	/**********************************************
 	 * 			** jQuery Methods **
 	 *********************************************/
@@ -25,16 +23,21 @@ $(document).ready(function() {
 	// $('#some-id');
 
 	// TODO TOGETHER: Select the contents/html of the id 'book-welcome' and set equal to the variable 'contents'. Console.log the contents
-
+	var contents = $('#book-welcome').html();
+	console.log(contents);
 
 	// TODO TOGETHER: Change the background color of the id 'book-welcome'
-
+	$('#book-welcome').css('background-color', 'DarkSlateBlue');
 
 	// TODO: Select the contents/html of the id 'book-bundle-one' and set equal to the variable 'bookBundle'. Console.log the contents
-
+	var bookBundle = $('#book-bundle-one').html();
+	console.log(bookBundle);
 
 	// TODO: Change one css property of the id 'container'
-
+	$('#container').css({
+		'background-color': '#4B0082', // Indigo
+		'color': '#F0FFFF' // Azure (off white)
+	});
 
 
 	/**********************************************
@@ -43,6 +46,7 @@ $(document).ready(function() {
 	// $('.some-class');
 
 	// TODO TOGETHER: Change the font size of all the .main-headings
+	$('.main-headings').css('font-size', '3em');
 
 
 	// TODO: Explore the following JS Bin example:
@@ -59,6 +63,7 @@ $(document).ready(function() {
 	//	$('tag_name')
 
 	// TODO TOGETHER: Change the background color of all paragraph tags
+	$('p').css('background-color','#0000CD'); // MediumBlue
 
 
 	// TODO: Explore the following JS Bin example:
@@ -75,7 +80,7 @@ $(document).ready(function() {
 
 
 	// TODO TOGETHER: Change the background color of id 'mystery-genre' and 'book-bundle-three' to red
-
+	$('#mystery-genre,#book-bundle-three').css('background-color', 'red');
 
 
 	// TODO: Explore the following JS Bin example:
@@ -92,6 +97,7 @@ $(document).ready(function() {
 	// A common use is to put a border around every element to help see the layout of a page.
 
 	// TODO TOGETHER: Create a border around all elements
+	$('*').css('border','1px solid blue');
 
 
 
