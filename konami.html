@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konami Code</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+        body, html {
+            height: 100%;
+        }
+        .container {
+            max-width: 100%;
+            height: 100%;
+            background-image: none;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        div .prize {
+            display: block;
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            bottom: 50%;
+            max-width: 200px;
+            max-height: 200px;
+            position: absolute;
+            top: 33%;
+            left: 37%;
+            border-radius: 20%;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Konami Code</h1>
+    <div id="imgdiv"></div>
+</div>
+
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+
+    (function ($) {
+        "use strict";
+
+        $(document).ready(function () {
+
+
+            //’secret’ specifies the keystrokes that make up the code
+            var secret = "3838404037393739666513";
+            var input = "";
+            var timer;
+
+//The following function sets a timer that checks for user input. You can change the variation in how long the user has to input by changing the number in ‘setTimeout.’ In this case, it’s set for 500 milliseconds or ½ second.
+            $(document).keyup(function (e) {
+                input += e.which;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    input = "";
+                }, 10000);
+                check_input();
+            });
+
+//Once the time is up, this function is run to see if the user’s input is the same as the secret code
+            function check_input() {
+                if (input == secret) {
+                    //the code for success is put here
+                    alert("You have added 30 lives!");
+                    var imageUrl = "img/trees.jpg";
+                    $(".container").css("background-image","url(" + imageUrl + ")");
+                    $("h1").css({"background-color": "cornsilk", "opacity": "0.5"});
+                    $("#imgdiv").html("<img class='prize' src='img/python-black-beast-argh.jpeg' alt='image montypython black beast of argh'>");
+                }
+            };
+
+/*
+            // original code using arrays... kind of works but not well
+            // Save targeted keyup events to an array & compare to the Konami code sequence
+            var bucket = [];
+            var konami = ["arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a", "enter"];
+            var eventKey = "";
+
+            $(document).keyup(function (event) {
+                eventKey = event.key.toLowerCase();
+                // console.log(eventKey); // debug
+
+                // if the key is not found in the konami array
+                // jQuery method inArray(value, array) returns index# or -1 if not found
+                // console.log($.inArray(eventKey, konami)); // debug
+                if ($.inArray(eventKey, konami) === -1) {
+                    // empty the bucket and exit the function
+                    // console.log("empty the bucket until the next keyup"); // debug
+                    bucket = [];
+                    return;
+                }
+
+                // add the key to the bucket array
+                bucket.push(eventKey);
+                // console.log(bucket); // debug
+
+                // check bucket length before checking for a valid sequence
+                if (bucket.length >= konami.length) {
+
+                    // loop through the bucket array to compare elements (in order) to the konami array
+                    for (var i = 0, j = 0; bucket.length - 1; i++) {
+
+                        // if it matches
+                        if (bucket[i] === konami[j]) {
+
+                            // check if it's the last element in konami array
+                            if (j === (konami.length - 1)) {
+                                // codes match
+                                alert("You have added 30 lives!");
+                                var imageUrl = "img/trees.jpg";
+                                $(".container").css("background-image","url(" + imageUrl + ")");
+                                $("h1").css({"background-color": "cornsilk", "opacity": "0.5"});
+
+                                break;
+                            } else {
+                                // not done, but it matches, increment konami counter and continue looping
+                                j++;
+                                continue;
+                            }
+                        } else {
+                            // it doesn't match, remove it, reset counters and continue to loop
+                            var curPos = bucket.indexOf(i);
+                            bucket.splice(curPos, 1);
+                            i = 0, j = 0;
+                            continue;
+                        }
+                    } // end of loop
+                    // console.log(bucket); // debug
+                } else {
+                    // else wait for next keyup event
+                    // console.log("wait for more keys"); // debug
+                    return;
+                }
+            });
+*/
+
+
+        });
+    })(jQuery);
+
+</script>
+</body>
+</html>
