@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Attributes and CSS</title>
+    <style>
+        /* Create CSS rules that set the invisible class to visibility: hidden;*/
+        .invisible {
+            visibility: hidden;
+        }
+        dd {
+            color: darkslateblue;
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="toggle-faqs">National Parks - Frequently Asked Questions</h1>
+
+<dl>
+    <dt>What is the most-visited US national park?</dt>
+    <dd>Great Smoky Mountains National Park (2019).</dd>
+
+    <dt>How many people visit the US national parks?</dt>
+    <dd>Over 327 million visitors (2019).</dd>
+
+    <dt>What is the largest US national park site?</dt>
+    <dd>Wrangell-St. Elias National Park and Preserve (AK), 13.2 million acres.</dd>
+
+    <dt>What is the smallest US national park site?</dt>
+    <dd>Thaddeus Kosciuszko National Memorial (PA), 0.02 acres.</dd>
+
+    <dt>Which park was the first national park in the US?</dt>
+    <dd>Yellowstone National Park (WY), est. 1872.</dd>
+
+    <dt>Which government agency oversees the US NPS?</dt>
+    <dd>NPS is overseen by the Department of the Interior's Assistant Secretary for Fish, Wildlife and Parks.</dd>
+
+    <dt>What country has the most national parks?</dt>
+    <dd>Russia</dd>
+
+    <dt>What is the world's oldest national park?</dt>
+    <dd>Bogd Khan Uul National Park in Mongolia, est. 1778, predating Yellowstone by nearly a century.</dd>
+
+    <dt>What is the world's largest national park?</dt>
+    <dd>Northeast Greenland National Park, 375,000 sq mi.</dd>
+
+    <dt>What was the first area to use the term "national park" in its creation legislation?</dt>
+    <dd>Mackinac National Park (MI), est. 1875.</dd>
+
+</dl>
+
+
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+
+    (function ($) {
+        "use strict";
+
+        $(document).ready(function () {
+
+            // Add a class to all dd elements named invisible
+            $('dd').addClass('invisible');
+
+            // Update the page w/jQuery to add a link that toggles the class invisible on and off for all dd elements
+            $('#toggle-faqs').click(function(){
+                $('dd').toggleClass('invisible');
+            });
+
+            // Bonus: when any dt element is clicked, the element clicked should be highlighted
+            $('dt').click(function(){
+                $(this).css('background-color', '#FF0');
+            });
+
+
+        });
+    })(jQuery);
+
+</script>
+
+</body>
+</html>
