@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Essential Methods</title>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link rel="stylesheet" href="css/essential-methods-lec.css">
+</head>
+<body>
+    <!--The Header contains the Banner-->
+    <header>
+        <h1 id="main-heading">Sorting Hat</h1>
+        <section class="banner">
+            <img src="img/sortinghat.png" alt="sorting_hat">
+        </section>
+    </header>
+    <!--The Main section containing our Houses-->
+    <main>
+        <section>
+            <input id="new-wizard" type="text" placeholder="Enter a name">
+            <button id="sort-wizard" type="submit">Sort!</button>
+<!--            <button id="reveal-houses">Reveal</button>-->
+        </section>
+        <section>
+            <button id="highlight-witches">Witches</button>
+            <button id="highlight-wizards">Wizards</button>
+            <button id="highlight-houses">Houses</button>
+         </section>
+        <div class="row">
+            <!--Gryffindor-->
+            <section class="column one-quarter">
+                <h3 id="gryffindor-house" class="house-name">Gryffindor</h3>
+                <ul id="gryffindor">
+                    <li class="wizards">Terrell</li>
+                    <li class="wizards">Daniel</li>
+                    <li class="wizards">Josh</li>
+                </ul>
+                <button id="lock-g" class="lock-in" type="submit">Lock In</button>
+            </section>
+            <!--Slytherin-->
+            <section class="column one-quarter">
+                <h3 id="slytherin-house" class="house-name">Slytherin</h3>
+                <ul id="slytherin">
+                    <li class="witches">Nadia</li>
+                    <li class="wizards">Carson</li>
+                </ul>
+                <button id="lock-s" class="lock-in" type="submit">Lock In</button>
+            </section>
+            <!--Ravenclaw-->
+            <section class="column one-quarter">
+                <h3 class="house-name">Ravenclaw</h3>
+                <ul id="ravenclaw">
+                    <li class="wizards">Fer</li>
+                    <li class="witches">Elle</li>
+                    <li class="wizards">Ali</li>
+                </ul>
+                <button class="lock-in" type="submit">Lock In</button>
+            </section>
+            <!--Hufflepuff-->
+            <section class="column one-quarter">
+                <h3 class="house-name">Hufflepuff</h3>
+                <ul id="hufflepuff">
+                    <li class="witches">Sophie</li>
+                    <li class="wizards">David</li>
+                </ul>
+                <button class="lock-in" type="submit">Lock In</button>
+            </section>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="js/essential-methods-lec.js"></script>
+</body>
+</html>
