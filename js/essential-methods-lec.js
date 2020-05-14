@@ -40,9 +40,10 @@ $(document).ready(function() {
     // this replaces the current list on click
     // to add to the list see the .append method above
     // or .prepend method
-    $('ul').click(function(){
-       $(this).html('<li>Test</li>');
-    });
+
+    // $('ul').click(function(){
+    //    $(this).html('<li>Test</li>');
+    // });
 
     // TODO TOGETHER: store the inner text of #main-heading in a variable
     var mainHeading =  $('#main-heading').text();
@@ -87,17 +88,38 @@ $(document).ready(function() {
      * 			       Traversing
      *********************************************/
 
-    // TODO TOGETHER: console log each list element's text
+    // $('gryffindor').children();
+    // children returns a collection, anything that's a list/collection, you can get .first() and .last() on
 
-    // TODO TOGETHER: select all list elements and console log the first match
+    // console.log($('#josh').next());
+
+    // TODO TOGETHER: console log each list element's text
+    // instead of arr.forEach(function(element(){}
+    // .each(function(index, element) {}) // similar to forEach loop but order of arguments is different - index, element
+    $('li').each(function(){
+        console.log($(this).html());
+    });
+
+    // // TODO TOGETHER: select all list elements and console log the first match
+    console.log($('li').first());
 
     // TODO TOGETHER: select all list elements and console log the last match
+    console.log($('li').last());
 
     // TODO TOGETHER: When I click on a list element, highlight its parent
+    $('li').click(function(){
+        $(this).parent().css('background-color', '#FF0');
+    });
 
     // TODO TOGETHER: When I click into a <ul>, console log last child in that group
+    $('ul').click(function(){
+        console.log($(this).children().last().html());
+    });
 
     // TODO TOGETHER: When I click on any list element, console log the next element
+    $('#r-heading').click(function(){
+        $(this).next().css('background-color', 'blue');
+    });
 
 
 
