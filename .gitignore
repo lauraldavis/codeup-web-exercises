@@ -1,6 +1,5 @@
 .idea/*
 *.iml
 secret.txt
-img/bill-the-cat.jpeg
 keys.js
 jquery-2.2.4.js

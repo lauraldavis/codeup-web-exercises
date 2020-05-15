@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Cinzel', serif;
+}
+h1,h2,h3,h4,h5 {
+    text-align: center;
+}
+img {
+    width: 175px;
+}
+section {
+    text-align: center;
+}
+ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+li {
+    text-align: center;
+    margin: 0;
+}
+section {
+    margin-top: 10px;
+}
+div.row{
+    margin-top: 2em;
+}
+/*Custom Rows and Columns - START*/
+.banner {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.container {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1200px;
+}
+.row {
+    width: 100%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.column{
+    float: left;
+    width: 100%;
+    padding: 1em;
+}
+.one-half{
+    width: 50%
+}
+.one-third{
+    width: 33.33%
+}
+.one-quarter{
+    width: 25%
+}
+.one-eighth{
+    width: 12.5%
+}
+/*Custom Rows and Columns - END*/
+.house{
+    background-color: #000;
+    color: #fff;
+}
+.gryffindor{
+    background-color: #F00;
+}
