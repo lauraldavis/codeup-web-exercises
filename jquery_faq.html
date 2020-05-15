@@ -4,18 +4,60 @@
     <meta charset="UTF-8">
     <title>jQuery Attributes and CSS</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 1em;
+            font-family: Arial, sans-serif;
+        }
+
         /* Create CSS rules that set the invisible class to visibility: hidden;*/
         .invisible {
             visibility: hidden;
         }
+
         dd {
             color: darkslateblue;
         }
+
+        .bonus {
+            text-align: center;
+        }
+
+        .framed-image {
+            display: inline-flex;
+            justify-content: center;
+            width: 150px;
+            height: 200px;
+            background-size: 190px;
+            background-position: center;
+            margin: 8vw;
+            border: 1em solid saddlebrown;
+        }
+
+        #left {
+            background-image: url("img/bill-the-cat.jpeg");
+        }
+
+        #center {
+            background-image: url("img/things1and2.jpg");
+        }
+
+        #right {
+            background-image: url("img/cat-in-the-hat.png");
+        }
+        .swap-button {
+            height: 20px;
+            position: relative;
+            top: 200px;
+            margin: 0;
+        }
+
+
     </style>
 </head>
 <body>
 
-<h1 id="toggle-faqs">National Parks - Frequently Asked Questions</h1>
+<h1 id="toggle-faqs">National Parks: Frequently Asked Questions</h1>
 
 <dl>
     <dt>What is the most-visited US national park?</dt>
@@ -50,6 +92,53 @@
 
 </dl>
 
+<h3 class="park-heading" id="sleeping-bear">Sleeping Bear Dunes National Lakeshore, Empire, Michigan</h3>
+<ul id="sleeping-bear-list">
+    <li>Sleeping Bear is in the lower peninsula, on the northeast shore of Lake Michigan.</li>
+    <li>It is known for its huge scalable dunes of the Dune Climb, a 300' tall sand bluff.</li>
+    <li>Good Harbor Beach is a good place to look for Petoskey stones - a fossilized coral that is Michigan's state
+        stone.
+    </li>
+    <li>South Manitou Island Lighthouse, on the uninhabited South Manitou Island, is accessible by ferry service.</li>
+</ul>
+<h3 class="park-heading" id="rocky-mountain">Rocky Mountain National Park</h3>
+<ul id="rocky-mountain-list">
+    <li>Old Fall River Road was the first auto route in RMNP, it's a gravel, one-way uphill 11-mile-long road full of
+        switchbacks.
+    </li>
+    <li>Trail Ridge Road, built by the Civilian Conservation Corps (CCC) during the Great Depression, is 48 miles and
+        climbs 4,000 feet.
+    </li>
+    <li>Elevations range from 7,500 feet to over 14,000 feet.</li>
+    <li>If you live at sea level, plan on several days to acclimate, to avoid altitude sickness from the lower oxygen
+        levels at high elevation.
+    </li>
+</ul>
+<h3 class="park-heading" id="haleakala">Haleakalā National Park, Maui, Hawaii</h3>
+<ul id="haleakala-list">
+    <li>Haleakalā ("house of the sun") is a dormant shield volcano in a "non-eruptive phase".</li>
+    <li>Haleakalā has erupted three times in approximately the last 900 years.</li>
+    <li>The temperatures at the summit (10,023') are at least 20 degrees colder than at sea level and often drop below
+        freezing.
+    </li>
+    <li>The silversword, an endangered species found only in the park, flowers once a lifetime and dies soon after. It
+        can live up to 90 years.
+    </li>
+</ul>
+<button id="btn-highlight" type="submit">Last Items</button>
+
+<h2 class="bonus">jQuery Traversing</h2>
+
+<div class="framed-image" id="left">
+    <button class="swap-button" id="swap-left">Swap</button>
+</div>
+<div class="framed-image" id="center">
+    <button class="swap-button" id="swap-center">Swap</button>
+</div>
+<div class="framed-image" id="right">
+    <button class="swap-button" id="swap-right">Swap</button>
+</div>
+
 
 <script src="js/jquery-2.2.4.js"></script>
 <script>
@@ -59,19 +148,70 @@
 
         $(document).ready(function () {
 
+            // Attributes and CSS
+
             // Add a class to all dd elements named invisible
             $('dd').addClass('invisible');
 
             // Update the page w/jQuery to add a link that toggles the class invisible on and off for all dd elements
-            $('#toggle-faqs').click(function(){
+            $('#toggle-faqs').click(function () {
                 $('dd').toggleClass('invisible');
             });
 
             // Bonus: when any dt element is clicked, the element clicked should be highlighted
-            $('dt').click(function(){
+            $('dt').click(function () {
                 $(this).css('background-color', '#FF0');
+                // or use $(this).toggleClass('highlighter');
             });
 
+            // Traversing
+            // 1-2. Add 3 unordered lists, each with a national park name in an h3 and a ul of 4 facts about the park
+
+            // 3. Create a button, on click make the last li in each ul have a yellow background
+            $('#btn-highlight').click(function () {
+                $('ul').each(function () {
+                    $(this).children().last().css('background-color', '#FF0');
+                });
+            });
+
+            // 4. When any h3 is clicked the li's under it should be bolded (font-weight: bold)
+            // David's walkthrough showed this without the each function but it doesn't work for me
+            $('h3').click(function () {
+                $(this).next().children().each(function () {
+                    $(this).css('font-weight', 'bold');
+                });
+            });
+
+            // 5. When any list item is clicked, first li of the parent ul should have font color blue
+            $('li').click(function () {
+                $(this).parent().children().first().css('color', 'blue');
+            });
+
+            // Bonus
+            // Create 3 divs to look like a picture frame, each with a unique background image and a button underneath that swaps the image from the frame. Use traversing functions. Rules:
+            // Left frame swaps to the right, takes image from center
+            // Center frame swaps randomly left or right
+            // Right frame swaps left, takes image from center
+
+            // <div class="framed-image" id="left"> <button class="swap-button" id="swap-left">Swap</button> </div>
+            // #left {
+            //     background-image: url("img/bill-the-cat.jpeg");
+            // }
+            // #center {
+            //     background-image: url("img/things1and2.jpg");
+            // }
+            // #right {
+            //     background-image: url("img/cat-in-the-hat.png");
+            // }
+            // $(#swap-left).click(function(){
+            //     // var src = $(this).attr('src');
+            //     //
+            //     // $(this).attr('src', src.replace('-off', '-on'));   //change off to on
+            //     //
+            //     // $('img').not(this).attr('src', function(_, src) {  //change on to off
+            //     //     return src.replace('-on', '-off');
+            //     // });
+            // });
 
         });
     })(jQuery);
