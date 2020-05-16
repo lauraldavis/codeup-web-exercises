@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+</head>
+<body>
+
+<h1>My Tool Store</h1>
+
+<table id="products">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Categories</th>
+    </tr>
+    </thead>
+    <tbody id="insertProducts"></tbody>
+</table>
+<button id="refresh-btn">Refresh</button>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        "use strict";
+
+        // TODO: Create an AJAX GET request for the file under data/inventory.json
+        $.ajax("data/inventory.json").done(function (data) {
+            console.log("AJAX call completed successfully");
+            console.log("Request status: " + status);
+            console.log(data);
+        });
+
+        // TODO: Take the data from inventory.json and append it to the products table
+        //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+        //             its contents and fields
+        //       HINT: You will want to target #insertProducts for your new HTML elements
+        // 3. load data from JSON file using get request & append data to the table
+        function appendProductsTable() {
+            $.get("data/inventory.json").done(function (data) {
+                // Title, Quantity, Price, Categories
+                // for (var i = 0; i < data.length; i++) {
+                //     var row = $('<tr><td>' + data[i].title + '</td><td>' + data[i].quantity + '</td><td>'
+                //         + data[i].price + '</td><td>' + data[i].categories + '</td></tr>');
+                //     $('#insertProducts').append(row);
+                // }
+                var row = "";
+                data.forEach(function (item) {
+                    row += '<tr>' +
+                        '<td>' + item.title + '</td>' +
+                        '<td>' + item.quantity + '</td>' +
+                        '<td>' + item.price + '</td>' +
+                        '<td>' + item.categories + '</td>' +
+                        '</tr>';
+                });
+                $('#insertProducts').append(row);
+            }).fail(function (e) {
+                alert(e + "Ajax request failed")
+            });
+        };
+        appendProductsTable();
+
+        // 4. Add some new entries to inventory.json and see how data gets updated
+        // I did this by editing the JSON file
+
+        // 5. Add a refresh button to reload the json file without reloading the entire page
+        $('#refresh-btn').click(function () {
+            // need to clear the table contents first before reloading
+            $('#insertProducts').html('<tbody id="insertProducts"></tbody>');
+            appendProductsTable();
+        });
+
+    });
+</script>
+
+</body>
+</html>

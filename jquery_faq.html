@@ -175,7 +175,8 @@
             });
 
             // 4. When any h3 is clicked the li's under it should be bolded (font-weight: bold)
-            // David's walkthrough showed this without the each function but it doesn't work for me
+            // David's walkthrough showed this without an each function but his solution didn't work for me
+            // the bold on hist text style was hard to see, so not sure if it was valid code or not?
             $('h3').click(function () {
                 $(this).next().children().each(function () {
                     $(this).css('font-weight', 'bold');
