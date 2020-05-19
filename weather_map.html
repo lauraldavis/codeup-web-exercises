@@ -9,14 +9,16 @@
     <style>
         #weather {
             width: 50%;
-            height: 200px;
+            height: 275px;
+            margin-top: 2em;
+            text-align: center;
         }
         #weather span {
             padding: 2em;
         }
         #map {
             width: 50%;
-            height: 300px;
+            height: 275px;
         }
     </style>
 </head>
@@ -74,7 +76,7 @@
         // Format unix timestamp as a date string m/d/yyyy
         function parseTimestamp(timestamp) {
             // Convert Unix Timestamp to local date string
-            return new Date(timestamp * 1000).toLocaleDateString();
+            return new Date(timestamp * 1000).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
         }
         function parseWeekday(timestamp) {
             // convert Unix Timestamp to weekday string
@@ -100,9 +102,12 @@
             var currPressure = data.current.pressure;                   // pressure
             var currUvi = data.current.uvi;                             // UV index
             var currWeatherStr = "";
-            currWeatherStr += "<span>" + myWeekday + "</span><br><span>" + myDate + "</span><br><span>" + currTemp+ "&#8457</span><br><span>";
-            currWeatherStr += currWeatherGroup + "</span><br><span><img src='http://openweathermap.org/img/wn/" + currWeatherIcon + "@2x.png'</img></span><br>";
-            currWeatherStr += "<span>" + currWeatherDesc + "</span><br>";
+            currWeatherStr += "<span>" + myWeekday + "</span><br>";
+            currWeatherStr += "<span>" + myDate + "</span><br>";
+            currWeatherStr += "<span><h1>" + currTemp.toFixed(0) + "&#8457</h1></span><br>"
+            currWeatherStr += "<span>" + currWeatherGroup + "</span><br>";
+            currWeatherStr += "<span><img src='http://openweathermap.org/img/wn/" + currWeatherIcon + "@2x.png'</img></span><br>";
+            // currWeatherStr += "<span>" + currWeatherDesc + "</span><br>";
 
             // console.log(currWeatherStr);
             $('#weather').append(currWeatherStr);
