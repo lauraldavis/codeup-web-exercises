@@ -31,8 +31,8 @@
         container: "map", // match the id defined in the div
         style: "mapbox://styles/mapbox/streets-v9", // add comma + additional properties to style the map
         zoom: 10,
-        // center: [-98.4916, 29.4252] // lat/long coordinates
-        center: {lat: latId, lng: lngId}
+        // center: [-98.4916, 29.4252] // lng/lat coordinates
+        center: {lng: lngId, lat: latId}
     });
 
     var restaurants = [
@@ -62,7 +62,7 @@
         }
     ];
 
-    // Jason's walkthrough - broken down into these steps
+    // walkthrough - broke down into steps
     // 1. log the name of each restaurant
     // 2. using geocoding log the coordinates of each restaurant
     // 3. add markers for each coordinate
