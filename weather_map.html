@@ -2,31 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Weather Map</title>
 
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Mapbox-->
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet"/>
+
+    <!-- Custom CSS-->
     <style>
+        /*current weather div */
         #weather {
-            width: 50%;
+            width: 100%;
             height: 275px;
-            margin-top: 2em;
+            margin-top: 1em;
             text-align: center;
         }
-        #weather span {
-            padding: 2em;
+
+        /*current weather temp*/
+        #weather span h2 {
+            margin: 0;
+            padding-top: 5px;
+            color: darkorange;
         }
+
+        /*current weather map*/
         #map {
-            width: 50%;
+            width: 100%;
             height: 275px;
+            margin-left: 1em;
         }
     </style>
+
 </head>
 <body>
 
-<div id="weather"></div>
-<div id="map"></div>
+<div class="d-flex flex-column" id="wrapper">
 
+    <div id="page-content-wrapper">
+
+<!--Navbar with pills/tabs and Location (city)-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Weather App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav nav-pills mr-auto" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-current-tab" data-toggle="pill" href="#pills-current"
+                           role="tab" aria-controls="pills-current" aria-selected="true">Current <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-forecast-tab" data-toggle="pill" href="#pills-forecast"
+                           role="tab" aria-controls="pills-forecast" aria-selected="false">5-Day Forecast</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Current city:
+<!--Replace default starting city with geocode lookup-->
+                    <span class="font-weight-bolder" id="current-city">
+                        San Antonio
+                    </span>
+                </span>
+            </div>
+        </nav>
+
+<!--Find location search form-->
+        <div class="search pl-5">
+            <form>
+                <label for="location">Place</label>
+                <input id="location" type="textarea" name="location" placeholder="San Antonio, Texas">
+                <button type="submit" id="search-btn" class="btn btn-primary btn-sm m-2">Find</button>
+            </form>
+        </div>
+
+<!--Nav pills/tabs content-->
+        <div class=tab-content" id="pills-tabContent">
+            <!--Current pill/tab -->
+            <div class="tab-pane show active" id="pills-current" role="tabpanel" aria-labelledby="pills-current-tab">
+
+                <div id="weather"></div>
+                <div id="map"></div>
+
+            </div>
+            <!--End current pill/tab-->
+
+            <!--Forecast pill/tab -->
+            <div class="tab-pane" id="pills-forecast" role="tabpanel" aria-labelledby="pills-forecast-tab">
+
+                <div id="weather-f"></div>
+                <div id="map-f"></div>
+
+            </div>
+            <!--End forecast pill/tab-->
+        </div>
+        <!--End pills/tabs content-->
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!--CDNs-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -36,23 +120,60 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-<!--Keys for Mapbox and OpenWeatherMap-->
+<!--API keys and Mapbox Geocoder Utility-->
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 
-<!-- Custom JS -->
+<!--Custom JS-->
 <script>
     $(document).ready(function () {
         "use strict";
 
-        // San Antonio lng/lat coordinates
+        // NAVIGATION LINKS
+
+        // From Bootstrap docs, not positive this is needed?
+        $('#pills-tab a').on('click', function (event) {
+            event.preventDefault();
+            $(this).tab('show')
+        });
+
+        $('#pills-tab li:first-child a').tab('show') // Select first tab (Current)
+        // $('#pills-tab li:last-child a').tab('show') // Select last tab (Forecast)
+
+        $('#pills-current').click(function (event) {
+            event.preventDefault();
+            // clear contents and reload
+            $('#weather').html('<div id="weather"></div>');
+            getWeatherCurrent();
+        });
+
+        $('#pills-forecast').click(function (event) {
+            event.preventDefault();
+            // clear contents and reload
+            $('#weather-f').html('<div id="weather-f"></div>');
+            getWeatherForecast();
+        });
+
+        // $('#search-btn').click(function(event) {
+        //     var val = $('input').val();
+        //         // .toLowerCase();
+        //         // Ajax .get API call
+        //     console.log(val);
+        // });
+
+
+        // San Antonio lng/lat coordinates for request to Mapbox API (default location)
         var lngId = -98.4936;
         var latId = 29.4241;
-        var excludeList = "minutely, hourly"; // current, daily
+        // Create variables for request to OpenWeatherMap OneCall API
+        var weatherUrl = 'http://api.openweathermap.org/data/2.5/onecall';
+        var appIdOWA = OPEN_WEATHER_APPID;
+        var excludeListCurrent = "minutely, hourly, daily"; // current
+        var excludeListForecast = "minutely, hourly, current"; // daily
         var tempUnits = 'imperial';
         var setTimezone = "America/Chicago";
 
-        // Mapbox API map using current location
+        // Create Mapbox API map using default location
         mapboxgl.accessToken = MAPBOX_KEY;
         var map = new mapboxgl.Map({
             container: "map", // match the id defined in the div
@@ -62,59 +183,168 @@
             center: {lng: lngId, lat: latId}
         });
 
-        // Format a request to OpenWeatherMap OneCall API
-        var weatherUrl = 'http://api.openweathermap.org/data/2.5/onecall';
-        var weatherOptions = {
+        // Format input options for requests to OpenWeatherMap OneCall API
+        var weatherOptionsCurrent = {
             lat: latId,
             lon: lngId,
-            appid: OPEN_WEATHER_APPID,
-            exclude: excludeList,
+            appid: appIdOWA,
+            exclude: excludeListCurrent,
+            units: tempUnits,
+            timezone: setTimezone
+        };
+        var weatherOptionsForecast = {
+            lat: latId,
+            lon: lngId,
+            appid: appIdOWA,
+            exclude: excludeListForecast,
             units: tempUnits,
             timezone: setTimezone
         };
 
-        // Format unix timestamp as a date string m/d/yyyy
-        function parseTimestamp(timestamp) {
-            // Convert Unix Timestamp to local date string
-            return new Date(timestamp * 1000).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
+        // Format timestamp output from OpenWeatherMap
+        function parseDate(timestamp, option) {
+            // Convert Unix Timestamp to local date string, option long (month d, yyyy) or short (yyyy-mm-dd)
+            if (option === "long") {
+                return new Date(timestamp * 1000).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } else {
+                return new Date(timestamp * 1000).toLocaleDateString('en-US');
+            }
         }
-        function parseWeekday(timestamp) {
-            // convert Unix Timestamp to weekday string
-            return new Date(timestamp * 1000).toLocaleDateString('en', {weekday: 'long'});
+
+        function parseDay(timestamp, option) {
+            // convert Unix Timestamp to local day of week string, option: short (abbr), narrow (1 char), default long (weekday)
+            if (option === "short") {
+                return new Date(timestamp * 1000).toLocaleDateString('en', {weekday: 'short'});
+            } else if (option === "narrow") {
+                return new Date(timestamp * 1000).toLocaleDateString('en', {weekday: 'narrow'});
+            } else {
+                return new Date(timestamp * 1000).toLocaleDateString('en', {weekday: 'long'});
+            }
         }
 
-        $.get(weatherUrl, weatherOptions).done(function (data) {
-            // data returns object with current, daily, hourly, minutely (use exclude property in options to narrow focus)
-            console.log(data);
-            // practice logging different pieces of weather data
-            // daily
-            // console.log(data.daily[0].humidity); // pressure
-            // console.log(data.daily[0].temp.max); // default is celcius, use option for units format
-            // var myDate = data.daily[0].dt; // Time of forecasted data, unix, UTC
-            //                                                          // current:
-            var myDate = parseTimestamp(data.current.dt);               // date string
-            var myWeekday = parseWeekday(data.current.dt);              // weekday string
-            var currTemp = data.current.temp;                           // temp F
-            var currWeatherGroup = data.current.weather[0].main;        // weather desc / group
-            var currWeatherDesc = data.current.weather[0].description;  // weather description / full
-            var currWeatherIcon = data.current.weather[0].icon;         // weather icon id
-            var currHumidity = data.current.humidity;                   // humidity
-            var currPressure = data.current.pressure;                   // pressure
-            var currUvi = data.current.uvi;                             // UV index
-            var currWeatherStr = "";
-            currWeatherStr += "<span>" + myWeekday + "</span><br>";
-            currWeatherStr += "<span>" + myDate + "</span><br>";
-            currWeatherStr += "<span><h1>" + currTemp.toFixed(0) + "&#8457</h1></span><br>"
-            currWeatherStr += "<span>" + currWeatherGroup + "</span><br>";
-            currWeatherStr += "<span><img src='http://openweathermap.org/img/wn/" + currWeatherIcon + "@2x.png'</img></span><br>";
-            // currWeatherStr += "<span>" + currWeatherDesc + "</span><br>";
+        function parseTime(timestamp) {
+            // convert Unix Timestamp to a time string HH:MM:SS AM/PM
+            return new Date(timestamp * 1000).toLocaleTimeString('en-US');
+        }
 
-            // console.log(currWeatherStr);
-            $('#weather').append(currWeatherStr);
+        // OpenWeatherMap request - current weather
+        function getWeatherCurrent() {
+            $.get(weatherUrl, weatherOptionsCurrent).done(function (data) {
+                // data returns object with current weather
+                console.log(data);
+                //                                                          // current:
+                var myDate = parseDate(data.current.dt, "long");            // date string (month, d, yyyy)
+                var myDay = parseDay(data.current.dt, "long");             // weekday string
+                var myTime = parseTime(data.current.dt);                    // time string
+                var currTemp = data.current.temp;                           // temp F
+                var currWeatherGroup = data.current.weather[0].main;        // weather desc / group
+                var currWeatherDesc = data.current.weather[0].description;  // weather description / full
+                var currWeatherIcon = data.current.weather[0].icon;         // weather icon id
+                // var currHumidity = data.current.humidity;                   // humidity
+                // var currWind = data.current.wind_speed;                     // wind speed
+                // var currPressure = data.current.pressure;                   // pressure
+                var currWeatherStr = "";
+                currWeatherStr += "<span>" + myDate + "</span><br>"
+                    + "<span>" + myDay + "</span><br>"
+                    + "<span>" + myTime + "</span><br>"
+                    + "<span><h2>" + Math.round(currTemp) + "&#8457</h2></span><br>"
+                    + "<span>" + currWeatherGroup + " (" + currWeatherDesc + ")</span><br>"
+                    + "<span><img src='http://openweathermap.org/img/wn/" + currWeatherIcon + "@2x.png'</img></span><br>";
+                // console.log(currWeatherStr);
+                $('#weather').append(currWeatherStr);
+            }).fail(function (e) {
+                alert(e + "Ajax request failed")
+            });
+        }
 
+        getWeatherCurrent();
+
+        // debug
+        // $.get(weatherUrl, weatherOptionsForecast).done(function (response) {
+        //     // data returns object with current, daily, hourly, minutely (use exclude property in options to narrow focus)
+        //     console.log(response);
+        // });
+
+
+        // OpenWeatherMap request - forecast weather
+        function getWeatherForecast() {
+            $.get(weatherUrl, weatherOptionsForecast).done(function (data) {
+                // response returns daily weather - array of data objects
+                console.log(data);
+                console.log(data.daily[0], "resp.daily[0]");
+                console.log(data.daily[0].dt, "resp.daily[0].dt");
+                var dayWeatherStr = "";
+                $.each(data, function (i, item) {
+                    for (i = 0; i < 5; i++) {
+                        // console.log(item.pressure + " < log pressure value for " + i); // undefined, unless change from "each(data," to "each(data.daily," but then get duplicates
+                        console.log(data.daily[i].dt +  " < should be dt value for " + i);
+                        console.log(parseDate(data.daily[i].dt, "short") + " < should be date string value for " + i);
+                        console.log(data.daily[i].weather[0].main + " < should be weather group value for " + i)
+                        //                                                             // daily:
+                        // var myDate = parseDate(data.daily[i].dt, "short");          // date string (yyyy-mm-dd)
+                        // var myDay = parseDay(data.daily[i].dt, "narrow");           // weekday string
+                        // var maxTemp = data.daily[i].temp.max;                       // max temp F
+                        // var minTemp = data.daily[i].temp.min;                       // min temp F
+                        // var dayWeatherGroup = data.daily[i].weather[0].main;        // weather desc / group
+                        // var dayWeatherDesc = data.daily[i].weather[0].description;  // weather description / full
+                        // var dayWeatherIcon = data.daily[i].weather[0].icon;         // weather icon id
+                        // var dayHumidity = data.daily[i].humidity;                   // humidity
+                        // var dayWindSp = data.daily[i].wind_speed;                   // wind speed
+                        // var dayPressure = data.daily[i].pressure;                   // pressure
+                        //
+                        // dayWeatherStr += <div class="card" style="width: 18rem;">
+                        //     + "<div class="card-header">" + myDate + "</div>"
+                        //     + "<span>" + myDay + "</span><br>"
+                        //     + "<span>" + maxTemp + "&#8457 / " + minTemp + "&#8457</span><br>"
+                        //     + "<span><img src='http://openweathermap.org/img/wn/" + dayWeatherIcon + "@2x.png'</img></span><br>"
+                        //     + "<span>Description: " + dayWeatherDesc + "</span><br>"
+                        //     + "<span>" + dayHumidity + "</span><br>"
+                        //     + "<span>" + dayWindSp + "</span><br>"
+                        //     + "<span>" + dayPressure + "</span><br>";
+/*
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+</div>
+*/
+
+                    }
+                });
+                console.log(dayWeatherStr);
+                $('#weather-f').append(dayWeatherStr);
+
+            }).fail(function (e) {
+                alert(e + "Ajax request failed")
+            });
+        }
+
+        getWeatherForecast();
+
+
+        var markers = [];
+
+        // Input an address / output coords to place a marker on the map
+        var myLocation = "San Antonio, TX";
+        geocode(myLocation, MAPBOX_KEY).then(function (coords) {
+            console.log(coords, "coords returned from mapbox for my location");
+            // var marker = new mapboxgl.Marker()
+            //     .setLngLat(coords)
+            //     .addTo(map);
+            // var popup = new mapboxgl.Popup()
+            //     .setHTML("<h4>" + restaurant.name + "</h4><h5>" + restaurant.address + "</h5>" + restaurant.popupHTML + "Favorite dish: " + restaurant.favDish);
+            // marker.setPopup(popup);
+            // markers.push(marker); // to store each marker in an array
         });
 
-
+        // if you stored address in an array, then you would refer to it with
+        // restaurant.location.address / restaurant.location.coords
 
 
     });
