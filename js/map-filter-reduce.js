@@ -88,7 +88,7 @@
     const userLangArr = userLang.substring(0, userLang.length - 1).split(",").sort();
     // filter out unique values and convert to comma-separated string
     let uniqLangStr = userLangArr.filter((element, index, array) => userLangArr.indexOf(element) === index);
-    // Add on join if you want to return it as a string: .join(",");
+    // Add on join if you want to return it as a string instead of an array: .join(",");
     console.log(uniqLangStr);
 
 
