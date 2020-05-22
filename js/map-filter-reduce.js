@@ -42,6 +42,7 @@
         }
     ];
 
+
     // 2. Use .filter to create an array of user objects where each user object has at least 3 languages in the languages array.
 
     const arr3Languages = users.filter(u => u.languages.length >= 3);
@@ -74,12 +75,19 @@
     // Bonus
 
     // 1. Use .reduce to get the unique list of languages from the list of users.
-    const userLang = users.reduce((userLang, user) => userLang + `${user.languages} `, "");
-    console.log(userLang);
+    const userLang = users.reduce((userLang, user) => userLang + `${user.languages},`, "");
+    // remove trailing comma and convert string to array
+    const userLangArr = userLang.substring(0, userLang.length - 1).split(",").sort();
+    // filter out unique values and convert to comma-separated string
+    const uniqLangStr = userLangArr.filter((element, index, array) => userLangArr.indexOf(element) === index).join(",");
+    console.log(uniqLangStr);
 
-    // const uniqLang = userLang.split().filter((element, index) => userLang.indexOf(element) === index);
-    // console.log(uniqLang);
-
+    // refactor to make more readable and eliminate extra variables/steps
+    const uniqueLanguages = users
+        .reduce((uniqueLanguages, user) => uniqueLanguages + `${user.languages},`, "")
+        .substring(0, length - 1).split(",").sort()
+        .filter((language, index) => .indexOf(language) === index).join(","); // indexOf is not defined
+    console.log(uniqueLanguages);
 
 
 })();
