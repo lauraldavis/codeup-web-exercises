@@ -169,18 +169,60 @@
     // console.log(powerOfFour(NaN), false);
 
     // Write a JavaScript function that takes in a string and returns the number of words in the string. If the function is ever passed an argument that is not a string, return the number 0.
-    function numberOfWords(str) {
-        if ( typeof str === "string" ) {
-            // return RegExp(/[aeiou]/).test(input.toLowerCase());
-            return str.split(" ").length;
-        } else {
-            return 0;
-        }
-    }
+    // function numberOfWords(str) {
+    //     if ( typeof str === "string" ) {
+    //         // return RegExp(/[aeiou]/).test(input.toLowerCase());
+    //         return str.split(" ").length;
+    //     } else {
+    //         return 0;
+    //     }
+    // }
+    //
+    // console.log(numberOfWords("This is not four words."));
+    // console.log(numberOfWords("101"));
+    // console.log(numberOfWords(10));
 
-    console.log(numberOfWords("This is not four words."));
-    console.log(numberOfWords("101"));
-    console.log(numberOfWords(10));
+
+    // Given the following array of objects, write a function in JavaScript that returns an array of objects where each hamster has a heightInMM
+    // greater than 85.
+
+    var hamsters = [
+        {
+            name: "Hamtaro",
+            heightInMM: 86,
+            fur: ['orange', 'white'],
+            gender: "male",
+            dateOfBirth: "August 6"
+        }, {
+            name: "Bijou",
+            heightInMM: 75,
+            fur: ['white'],
+            gender: "female",
+            dateOfBirth: "July 10"
+        }, {
+            name: "Oxnard",
+            heightInMM: 100,
+            fur: ['grey', 'white'],
+            gender: "male",
+            dateOfBirth: "May 3"
+        }, {
+            name: "Boss",
+            heightInMM: 120,
+            fur: ['black', 'cream'],
+            gender: "male",
+            dateOfBirth: "Spetember 21"
+        }, {
+            name: "Snoozer",
+            heightInMM: 85,
+            fur: ['brown', 'white'],
+            gender: "male",
+            dateOfBirth: "January 14"
+        }
+    ];
+    // this part makes it a function: " = (arr) => "
+    const tallHamsters = (arr) => hamsters.filter(h => h.heightInMM > 85);
+    console.log(tallHamsters);
+
 
 </script>
 </body>
