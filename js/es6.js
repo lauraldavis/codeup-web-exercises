@@ -105,8 +105,8 @@ $(document).ready(function () {
     }
     list += '</ul>';
 
-// from David's walkthrough - to display the list
-    let holdThis = document.getElementsByTagName("body")[0].innerHTML;
-    document.getElementsByTagName("body")[0].innerHTML = holdThis + list;
+// Added this from David's walk-through, to display the list
+    let holdThis = document.getElementsByTagName('body')[0].innerHTML;
+    document.getElementsByTagName('body')[0].innerHTML = holdThis + list;
 
 });
