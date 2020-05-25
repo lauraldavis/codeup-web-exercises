@@ -19,6 +19,10 @@
             color: darkslateblue;
         }
 
+        .small-h1 {
+            font-size: x-small;
+        }
+
         .bonus {
             text-align: center;
         }
@@ -34,15 +38,15 @@
             border: 1em solid saddlebrown;
         }
 
-        #left {
+        .left {
             background-image: url("img/bill-the-cat.jpeg");
         }
 
-        #center {
+        .center {
             background-image: url("img/things1and2.jpg");
         }
 
-        #right {
+        .right {
             background-image: url("img/cat-in-the-hat.png");
         }
         .swap-button {
@@ -52,12 +56,11 @@
             margin: 0;
         }
 
-
     </style>
 </head>
 <body>
 
-<h1 id="toggle-faqs">National Parks: Frequently Asked Questions</h1>
+<h1 id="toggle-faqs">National Parks: Frequently Asked Questions<span class="small-h1">(click here to display answers)</span></h1>
 
 <dl>
     <dt>What is the most-visited US national park?</dt>
@@ -130,13 +133,13 @@
 
 <h2 class="bonus">jQuery Traversing</h2>
 
-<div class="framed-image" id="left">
+<div class="framed-image left" id="left">
     <button class="swap-button" id="swap-left">Swap</button>
 </div>
-<div class="framed-image" id="center">
+<div class="framed-image center"  id="center">
     <button class="swap-button" id="swap-center">Swap</button>
 </div>
-<div class="framed-image" id="right">
+<div class="framed-image right"  id="right">
     <button class="swap-button" id="swap-right">Swap</button>
 </div>
 
@@ -190,30 +193,34 @@
             });
 
             // Bonus
-            // Create 3 divs to look like a picture frame, each with a unique background image and a button underneath that swaps the image from the frame. Use traversing functions. Rules:
-            // Left frame swaps to the right, takes image from center
-            // Center frame swaps randomly left or right
-            // Right frame swaps left, takes image from center
+            // Create 3 divs to look like a picture frame, each with a unique background image and a button underneath that swaps the image from the frame. Use the jQuery traversing functions. Rules:
+            // Left frame swaps to the right, and takes the image from the center
+            // Center frame swaps randomly to the left or right
+            // Right frame swaps to the left, takes the image from the center
 
-            // <div class="framed-image" id="left"> <button class="swap-button" id="swap-left">Swap</button> </div>
-            // #left {
-            //     background-image: url("img/bill-the-cat.jpeg");
-            // }
-            // #center {
-            //     background-image: url("img/things1and2.jpg");
-            // }
-            // #right {
-            //     background-image: url("img/cat-in-the-hat.png");
-            // }
-            // $(#swap-left).click(function(){
-            //     // var src = $(this).attr('src');
-            //     //
-            //     // $(this).attr('src', src.replace('-off', '-on'));   //change off to on
-            //     //
-            //     // $('img').not(this).attr('src', function(_, src) {  //change on to off
-            //     //     return src.replace('-on', '-off');
-            //     // });
-            // });
+            // Sort of works but doesn't store previous swaps so you get some duplicates...
+
+            $("#swap-left").click(function(){
+                $("#left").toggleClass("left").toggleClass("center");
+                $("#center").toggleClass("center").toggleClass("left");
+            });
+
+            $("#swap-center").click(function(){
+                var random = Math.floor((Math.random() * 4) + 1);
+                if (random % 2 === 0) {
+                    $("#left").toggleClass("left").toggleClass("center");
+                    $("#center").toggleClass("center").toggleClass("left");
+                } else {
+                    $("#right").toggleClass("right").toggleClass("center");
+                    $("#center").toggleClass("center").toggleClass("right");
+                }
+            });
+
+            $("#swap-right").click(function(){
+                $("#right").toggleClass("right").toggleClass("center");
+                $("#center").toggleClass("center").toggleClass("right");
+            });
+
 
         });
     })(jQuery);
