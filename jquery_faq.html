@@ -127,6 +127,7 @@
 </ul>
 <button id="btn-highlight" type="submit">Last Items</button>
 
+
 <h2 class="bonus">jQuery Traversing</h2>
 
 <div class="framed-image" id="left">
@@ -151,16 +152,16 @@
             // Attributes and CSS
 
             // Add a class to all dd elements named invisible
-            $('dd').addClass('invisible');
+            $("dd").addClass("invisible");
 
             // Update the page w/jQuery to add a link that toggles the class invisible on and off for all dd elements
-            $('#toggle-faqs').click(function () {
-                $('dd').toggleClass('invisible');
+            $("#toggle-faqs").click(function () {
+                $("dd").toggleClass("invisible");
             });
 
             // Bonus: when any dt element is clicked, the element clicked should be highlighted
-            $('dt').click(function () {
-                $(this).css('background-color', '#FF0');
+            $("dt").click(function () {
+                $(this).css("background-color", "#FF0");
                 // or use $(this).toggleClass('highlighter');
             });
 
@@ -169,23 +170,23 @@
 
             // 3. Create a button, on click make the last li in each ul have a yellow background
             $('#btn-highlight').click(function () {
-                $('ul').each(function () {
-                    $(this).children().last().css('background-color', '#FF0');
+                $("ul").each(function () {
+                    $(this).children().last().css("background-color", "#FF0");
                 });
             });
 
             // 4. When any h3 is clicked the li's under it should be bolded (font-weight: bold)
             // David's walkthrough showed this without an each function but his solution didn't work for me
             // the bold on hist text style was hard to see, so not sure if it was valid code or not?
-            $('h3').click(function () {
+            $("h3").click(function () {
                 $(this).next().children().each(function () {
-                    $(this).css('font-weight', 'bold');
+                    $(this).css("font-weight", "bold");
                 });
             });
 
             // 5. When any list item is clicked, first li of the parent ul should have font color blue
-            $('li').click(function () {
-                $(this).parent().children().first().css('color', 'blue');
+            $("li").click(function () {
+                $(this).parent().children().first().css("color", "blue");
             });
 
             // Bonus
