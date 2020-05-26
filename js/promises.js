@@ -12,7 +12,6 @@
     // there is a type property (push event) for each event, in order by most recent event, filter out specific events by the date (timestamp)
 
     function gitHubLastPush(username = 'lauraldavis') {
-        // refactor with username when its working
 
         let gitHubAPIUsers = fetch(`https://api.github.com/users/${username}/events`, {headers: {'Authorization': `token ${GITHUB_KEY}`}});
         // console.log(gitHubAPIUsers);
@@ -23,9 +22,14 @@
             // .then(events => console.log(new Date(events[0].created_at).toDateString()))
             // just the push events
             .then(events => console.log(new Date(events.filter(user => user.type === "PushEvent")[0].created_at).toDateString()))
+
+            // This doesn't work... need to figure out how to return the date value rather than log it
+            // .then(events => new Date(events.filter(user => user.type === "PushEvent")[0].created_at).toDateString())
             .catch(error => console.log(error));
     }
     gitHubLastPush();
+
+
     // test other users
     // gitHubLastPush('jreich5');
     // gitHubLastPush('Shelbypol')
