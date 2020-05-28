@@ -45,7 +45,7 @@
 
     <div id="page-content-wrapper">
 
-<!--Navbar with pills/tabs and Location (city)-->
+        <!--Navbar with pills/tabs and Location (city)-->
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <a class="navbar-brand" href="#">Weather App</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -53,7 +53,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav nav-pills mr-auto" id="pills-tab" role="tablist">
+                <!--                Changing ul class from navbar-nav to nav fixes an error but makes forecast tab nearly invisible-->
+                <ul class="nav nav-pills mr-auto" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-current-tab" data-toggle="pill" href="#pills-current"
                            role="tab" aria-controls="pills-current" aria-selected="true">Current <span class="sr-only">(current)</span></a>
@@ -65,7 +66,7 @@
                 </ul>
                 <span class="navbar-text">
                     Current city:
-<!--Replace default starting city with geocode lookup-->
+                    <!--Replace default starting city with geocode lookup-->
                     <span class="font-weight-bolder" id="current-city">
                         San Antonio
                     </span>
@@ -73,7 +74,7 @@
             </div>
         </nav>
 
-<!--Find location search form-->
+        <!--Find location search form-->
         <div class="search pl-5">
             <form>
                 <label for="location">Place</label>
@@ -82,23 +83,24 @@
             </form>
         </div>
 
-<!--Nav pills/tabs content-->
+        <!--NAV pills/tabs content-->
         <div class=tab-content" id="pills-tabContent">
             <!--Current pill/tab -->
-            <div class="tab-pane show active" id="pills-current" role="tabpanel" aria-labelledby="pills-current-tab">
-
-                <div id="weather"></div>
-                <div id="map"></div>
-
+            <div class="tab-pane fade show active" id="pills-current" role="tabpanel"
+                 aria-labelledby="pills-current-tab">
+                <div class="container-fluid my-3">
+                    <div id="weather"></div>
+                    <div id="map"></div>
+                </div>
             </div>
             <!--End current pill/tab-->
 
             <!--Forecast pill/tab -->
-            <div class="tab-pane" id="pills-forecast" role="tabpanel" aria-labelledby="pills-forecast-tab">
-
-                <div id="weather-f"></div>
-                <div id="map-f"></div>
-
+            <div class="tab-pane fade show" id="pills-forecast" role="tabpanel" aria-labelledby="pills-forecast-tab">
+                <div class="container-fluid d-flex my-3">
+                    <div class="d-flex" id="weather-f"></div>
+                    <div id="map-f"></div>
+                </div>
             </div>
             <!--End forecast pill/tab-->
         </div>
@@ -126,20 +128,24 @@
 
 <!--Custom JS-->
 <script>
+    // Using HTML, CSS, jQuery, AJAX, and the OpenWeatherMap API, start by showing current conditions for your city.
+    // Update layout & AJAX requests to display a 5-day forecast for your city that looks like the screenshot provided.
+    "use strict";
     $(document).ready(function () {
-        "use strict";
 
-        // NAVIGATION LINKS
+        // NAVIGATION LINKS * * *
 
-        // From Bootstrap docs, not positive this is needed?
+        // From Bootstrap docs, via JS, enable tabbable tabs. Activate each tab individually.
         $('#pills-tab a').on('click', function (event) {
             event.preventDefault();
             $(this).tab('show')
         });
 
-        $('#pills-tab li:first-child a').tab('show') // Select first tab (Current)
-        // $('#pills-tab li:last-child a').tab('show') // Select last tab (Forecast)
+        // Select which tab is the default (comment the other)
+        // $('#pills-tab li:first-child a').tab('show'); // select first tab
+        // $('#pills-tab li:last-child a').tab('show'); // select second tab
 
+        // Current
         $('#pills-current').click(function (event) {
             event.preventDefault();
             // clear contents and reload
@@ -147,24 +153,49 @@
             getWeatherCurrent();
         });
 
+        // 5-Day Forecast
         $('#pills-forecast').click(function (event) {
             event.preventDefault();
             // clear contents and reload
-            $('#weather-f').html('<div id="weather-f"></div>');
+            $('#weather-f').html('<div class="d-flex" id="weather-f"></div>');
             getWeatherForecast();
         });
 
-        // $('#search-btn').click(function(event) {
-        //     var val = $('input').val();
-        //         // .toLowerCase();
-        //         // Ajax .get API call
-        //     console.log(val);
-        // });
+        $('#search-btn').click(function (event) {
+            event.preventDefault();
+            var searchInput = document.getElementById('location').value;
+            geocode(searchInput, MAPBOX_KEY).then(function (result) {
+                console.log(result);
+                map.setCenter(result);
+                marker.setLngLat(result);
+                map.setZoom(12);
+                lngId = result[0];
+                latId = result[1];
+                // update weatheroptions
+                var tabId = $(".tab-pane").attr("id");
+                console.log(tabId); // pills-current
+            });
+        });
 
+        // INITIALIZE VARIABLES & CREATE DEFAULT MAP * * *
 
         // San Antonio lng/lat coordinates for request to Mapbox API (default location)
         var lngId = -98.4936;
         var latId = 29.4241;
+        // Create map using default location
+        mapboxgl.accessToken = MAPBOX_KEY;
+        var map = new mapboxgl.Map({
+            container: "map", // match the id defined in the div
+            style: "mapbox://styles/mapbox/streets-v9", // add comma + additional properties to style the map
+            zoom: 10,
+            center: {lng: lngId, lat: latId}
+        });
+        // Add draggable marker
+        var marker = new mapboxgl.Marker()
+            .setLngLat([lngId, latId])
+            .addTo(map)
+            .setDraggable(true);
+
         // Create variables for request to OpenWeatherMap OneCall API
         var weatherUrl = 'http://api.openweathermap.org/data/2.5/onecall';
         var appIdOWA = OPEN_WEATHER_APPID;
@@ -173,33 +204,12 @@
         var tempUnits = 'imperial';
         var setTimezone = "America/Chicago";
 
-        // Create Mapbox API map using default location
-        mapboxgl.accessToken = MAPBOX_KEY;
-        var map = new mapboxgl.Map({
-            container: "map", // match the id defined in the div
-            style: "mapbox://styles/mapbox/streets-v9", // add comma + additional properties to style the map
-            zoom: 10,
-            // center: [-98.4916, 29.4252] // lng/lat coordinates
-            center: {lng: lngId, lat: latId}
-        });
+        // Format input options for OpenWeatherMap OneCall API requests within functions
+        // getWeatherCurrent()
+        // getWeatherForecast()
 
-        // Format input options for requests to OpenWeatherMap OneCall API
-        var weatherOptionsCurrent = {
-            lat: latId,
-            lon: lngId,
-            appid: appIdOWA,
-            exclude: excludeListCurrent,
-            units: tempUnits,
-            timezone: setTimezone
-        };
-        var weatherOptionsForecast = {
-            lat: latId,
-            lon: lngId,
-            appid: appIdOWA,
-            exclude: excludeListForecast,
-            units: tempUnits,
-            timezone: setTimezone
-        };
+
+        // TIMESTAMP FORMATTING
 
         // Format timestamp output from OpenWeatherMap
         function parseDate(timestamp, option) {
@@ -231,14 +241,24 @@
             return new Date(timestamp * 1000).toLocaleTimeString('en-US');
         }
 
+        // REQUEST WEATHER DATA
+
         // OpenWeatherMap request - current weather
         function getWeatherCurrent() {
+            var weatherOptionsCurrent = {
+                lat: latId,
+                lon: lngId,
+                appid: appIdOWA,
+                exclude: excludeListCurrent,
+                units: tempUnits,
+                timezone: setTimezone
+            };
             $.get(weatherUrl, weatherOptionsCurrent).done(function (data) {
                 // data returns object with current weather
                 console.log(data);
                 //                                                          // current:
                 var myDate = parseDate(data.current.dt, "long");            // date string (month, d, yyyy)
-                var myDay = parseDay(data.current.dt, "long");             // weekday string
+                var myDay = parseDay(data.current.dt, "long");              // weekday string
                 var myTime = parseTime(data.current.dt);                    // time string
                 var currTemp = data.current.temp;                           // temp F
                 var currWeatherGroup = data.current.weather[0].main;        // weather desc / group
@@ -263,63 +283,52 @@
 
         getWeatherCurrent();
 
-        // debug
         // $.get(weatherUrl, weatherOptionsForecast).done(function (response) {
-        //     // data returns object with current, daily, hourly, minutely (use exclude property in options to narrow focus)
         //     console.log(response);
         // });
 
 
-        // OpenWeatherMap request - forecast weather
+        // OpenWeatherMap request - returns daily weather forecast
         function getWeatherForecast() {
+            var weatherOptionsForecast = {
+                lat: latId,
+                lon: lngId,
+                appid: appIdOWA,
+                exclude: excludeListForecast,
+                units: tempUnits,
+                timezone: setTimezone
+            };
             $.get(weatherUrl, weatherOptionsForecast).done(function (data) {
                 // response returns daily weather - array of data objects
-                console.log(data);
-                console.log(data.daily[0], "resp.daily[0]");
-                console.log(data.daily[0].dt, "resp.daily[0].dt");
                 var dayWeatherStr = "";
+                data = data.daily.splice(0, 5);
+                console.log(data);
                 $.each(data, function (i, item) {
-                    for (i = 0; i < 5; i++) {
-                        // console.log(item.pressure + " < log pressure value for " + i); // undefined, unless change from "each(data," to "each(data.daily," but then get duplicates
-                        console.log(data.daily[i].dt +  " < should be dt value for " + i);
-                        console.log(parseDate(data.daily[i].dt, "short") + " < should be date string value for " + i);
-                        console.log(data.daily[i].weather[0].main + " < should be weather group value for " + i)
-                        //                                                             // daily:
-                        // var myDate = parseDate(data.daily[i].dt, "short");          // date string (yyyy-mm-dd)
-                        // var myDay = parseDay(data.daily[i].dt, "narrow");           // weekday string
-                        // var maxTemp = data.daily[i].temp.max;                       // max temp F
-                        // var minTemp = data.daily[i].temp.min;                       // min temp F
-                        // var dayWeatherGroup = data.daily[i].weather[0].main;        // weather desc / group
-                        // var dayWeatherDesc = data.daily[i].weather[0].description;  // weather description / full
-                        // var dayWeatherIcon = data.daily[i].weather[0].icon;         // weather icon id
-                        // var dayHumidity = data.daily[i].humidity;                   // humidity
-                        // var dayWindSp = data.daily[i].wind_speed;                   // wind speed
-                        // var dayPressure = data.daily[i].pressure;                   // pressure
-                        //
-                        // dayWeatherStr += <div class="card" style="width: 18rem;">
-                        //     + "<div class="card-header">" + myDate + "</div>"
-                        //     + "<span>" + myDay + "</span><br>"
-                        //     + "<span>" + maxTemp + "&#8457 / " + minTemp + "&#8457</span><br>"
-                        //     + "<span><img src='http://openweathermap.org/img/wn/" + dayWeatherIcon + "@2x.png'</img></span><br>"
-                        //     + "<span>Description: " + dayWeatherDesc + "</span><br>"
-                        //     + "<span>" + dayHumidity + "</span><br>"
-                        //     + "<span>" + dayWindSp + "</span><br>"
-                        //     + "<span>" + dayPressure + "</span><br>";
-/*
+                    //                                                             // daily:
+                    var myDate = parseDate(data[i].dt, "short");          // date string (yyyy-mm-dd)
+                    var myDay = parseDay(data[i].dt, "short");            // weekday string
+                    var maxTemp = data[i].temp.max;                       // max temp F
+                    var minTemp = data[i].temp.min;                       // min temp F
+                    var dayWeatherGroup = data[i].weather[0].main;        // weather desc / group
+                    var dayWeatherDesc = data[i].weather[0].description;  // weather description / full
+                    var dayWeatherIcon = data[i].weather[0].icon;         // weather icon id
+                    var dayHumidity = data[i].humidity;                   // humidity
+                    var dayWindSp = data[i].wind_speed;                   // wind speed
+                    var dayPressure = data[i].pressure;                   // pressure
 
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
-</div>
-*/
-
-                    }
+                    dayWeatherStr += '<div class="card-group"><div class="card m-2" style="width: 18%;">'
+                        + '<div class="card-header text-center">' + myDay + ', ' + myDate + '</div>'
+                        + '<ul class="list-group list-group-flush">'
+                        + '<li class="list-group-item text-center">' + Math.round(maxTemp) + '&#8457 / ' + Math.round(minTemp) + '&#8457<br>'
+                        + '<img src="http://openweathermap.org/img/wn/' + dayWeatherIcon + '@2x.png"</img></li>'
+                        + '<li class="list-group-item">Description: <strong>' + dayWeatherDesc + '</strong></li>'
+                        + '<li class="list-group-item">Humidity: <strong>' + dayHumidity + '</strong></li>'
+                        + '<li class="list-group-item">Wind: <strong>' + dayWindSp + '</strong></li>'
+                        + '<li class="list-group-item">Pressure: <strong>' + dayPressure + '</strong></li>'
+                        + '</ul></div></div>';
                 });
-                console.log(dayWeatherStr);
+                // console.log(dayWeatherStr);
                 $('#weather-f').append(dayWeatherStr);
-
             }).fail(function (e) {
                 alert(e + "Ajax request failed")
             });
@@ -328,20 +337,20 @@
         getWeatherForecast();
 
 
-        var markers = [];
-
-        // Input an address / output coords to place a marker on the map
-        var myLocation = "San Antonio, TX";
-        geocode(myLocation, MAPBOX_KEY).then(function (coords) {
-            console.log(coords, "coords returned from mapbox for my location");
-            // var marker = new mapboxgl.Marker()
-            //     .setLngLat(coords)
-            //     .addTo(map);
-            // var popup = new mapboxgl.Popup()
-            //     .setHTML("<h4>" + restaurant.name + "</h4><h5>" + restaurant.address + "</h5>" + restaurant.popupHTML + "Favorite dish: " + restaurant.favDish);
-            // marker.setPopup(popup);
-            // markers.push(marker); // to store each marker in an array
-        });
+        // var markers = [];
+        //
+        // // Input an address / output coords to place a marker on the map
+        // var myLocation = "San Antonio, TX";
+        // geocode(myLocation, MAPBOX_KEY).then(function (coords) {
+        //     console.log(coords, "coords returned from mapbox for my location");
+        //     var marker = new mapboxgl.Marker()
+        //         .setLngLat(coords)
+        //         .addTo(map);
+        //     var popup = new mapboxgl.Popup()
+        //         .setHTML("<h4>" + restaurant.name + "</h4><h5>" + restaurant.address + "</h5>" + restaurant.popupHTML + "Favorite dish: " + restaurant.favDish);
+        //     marker.setPopup(popup);
+        //     markers.push(marker); // to store each marker in an array
+        // });
 
         // if you stored address in an array, then you would refer to it with
         // restaurant.location.address / restaurant.location.coords
