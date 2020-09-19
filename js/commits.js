@@ -41,7 +41,7 @@ const getCommits = (username = 'lauraldavis') => {
         // })
 
         .then(events => {
-            console.log(events);
+            console.log(events.filter(user => user.type === "PushEvent"));
 
             // display data
             let output = '<h3>Commit Count - Distinct (Total) / Push Datetime / Repo Name</h3><ul>';
