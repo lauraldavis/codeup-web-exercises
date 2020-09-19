@@ -44,19 +44,18 @@ const getCommits = (username = 'lauraldavis') => {
             console.log(events);
 
             // display data
-            let output = '';
+            let output = '<h3>Push Date  / Commit Count / Repo Name</h3><ul>';
             events.forEach(function(event) {
                 if (event.type === "PushEvent") {
                     output += `<li>${new Date(event.created_at).toDateString()} ${event.payload.distinct_size} ${event.repo.name}</li>`;
                 }
             });
+            output += '</ul>';
                 // event.actor.login is same as ${username}
                 // event.payload.commits
                 //      .sha,
                 //      .author
-                //      .message,
-                //      .url
-
+                //      .message
             document.getElementById('output').innerHTML = output;
             })
             .catch(error => console.log(error));
