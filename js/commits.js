@@ -47,7 +47,7 @@ const getCommits = (username = 'lauraldavis') => {
             let output = '';
             events.forEach(function(event) {
                 if (event.type === "PushEvent") {
-                    output += `<li>${event.created_at} ${event.payload.size} ${event.repo.name}`
+                    output += `<li>${new Date(event.created_at).toDateString()} ${event.payload.distinct_size} ${event.repo.name}</li>`;
                 }
             });
                 // event.actor.login is same as ${username}
@@ -63,7 +63,7 @@ const getCommits = (username = 'lauraldavis') => {
             // display error
             document.getElementById('output').innerHTML = err;
 
-    getCommits().then(console.log);
+    // getCommits().then(console.log);
 }
 
 // add event listener to button1
