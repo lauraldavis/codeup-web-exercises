@@ -10,8 +10,11 @@
 // there is a type property (push event) for each event, in order by most recent event, filter out specific events by the date (timestamp)
 
 
+// add event listener to button1
+document.getElementById("button1").addEventListener("click", getCommits);
+
 // get GitHub API user event data
-const getCommits = (username = 'lauraldavis') => {
+function getCommits(username = 'lauraldavis') {
 
     const gitHubAPIUsers = fetch(`https://api.github.com/users/${username}/events`, {headers: {'Authorization': `token ${GITHUB_KEY}`}});
 
@@ -44,7 +47,8 @@ const getCommits = (username = 'lauraldavis') => {
             console.log(events.filter(user => user.type === "PushEvent"));
 
             // display data
-            let output = '<h3>Commit Count - Distinct (Total) / Push Datetime / Repo Name</h3><ul>';
+            let output = `<p>Data refreshed: ${new Date()}</p>`
+            output += '<h3>Commit Count - Distinct (Total) / Push Datetime / Repo Name</h3><ul>';
             events.forEach(function(event) {
                 if (event.type === "PushEvent") {
                     output += `<li>${event.payload.distinct_size} 
@@ -67,9 +71,6 @@ const getCommits = (username = 'lauraldavis') => {
 
     // getCommits().then(console.log);
 }
-
-// add event listener to button1
-document.getElementById('button1').addEventListener('click', getCommits());
 
 // test w/ other users
 // getLastPush('jreich5').then(console.log);
