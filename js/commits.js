@@ -44,10 +44,13 @@ const getCommits = (username = 'lauraldavis') => {
             console.log(events);
 
             // display data
-            let output = '<h3>Push Date  / Commit Count / Repo Name</h3><ul>';
+            let output = '<h3>Commit Count - Distinct (Total) / Push Datetime / Repo Name</h3><ul>';
             events.forEach(function(event) {
                 if (event.type === "PushEvent") {
-                    output += `<li>${new Date(event.created_at).toDateString()} ${event.payload.distinct_size} ${event.repo.name}</li>`;
+                    output += `<li>${event.payload.distinct_size} 
+                             (${event.payload.size}) 
+                             ${new Date(event.created_at).toLocaleString('en-us',{weekday:'short', month:'short', day:'numeric', year:'numeric', hour: '2-digit', minute: '2-digit'}).toUpperCase()} 
+                             ${event.repo.name}</li>`;
                 }
             });
             output += '</ul>';
